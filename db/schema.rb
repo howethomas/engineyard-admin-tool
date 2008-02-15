@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 16) do
+
+  create_table "actions", :force => true do |t|
+    t.integer  "server_id"
+    t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+  end
 
   create_table "employees", :force => true do |t|
     t.string   "name"
@@ -32,6 +40,12 @@ ActiveRecord::Schema.define(:version => 10) do
   create_table "memberships", :force => true do |t|
     t.integer  "group_id"
     t.integer  "employee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "servers", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
