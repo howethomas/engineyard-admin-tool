@@ -14,7 +14,7 @@ set :deploy_to, "#{project_deploy_to_root}/#{application}"
 # your SCM below:
 # set :scm, :subversion
 
-set :main_server, "10.0.1.195"
+set :main_server, "192.168.2.3"
 
 role :app, main_server
 role :web, main_server
