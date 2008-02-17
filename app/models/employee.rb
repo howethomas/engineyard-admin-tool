@@ -1,5 +1,13 @@
-puts "Loading employee"
 class Employee < ActiveRecord::Base
+  
+  # SHOULD BE FROM DATABASE!
+  CALL_TIMES = 9..17 # 9am to 5pm
+  
+  class << self
+    def with_extension_like(beginning)
+      find :all, :conditions => "extension LIKE \"#{beginning}%\""
+    end
+  end
   
   validates_numericality_of :extension
   validates_presence_of :name, :extension
@@ -7,8 +15,14 @@ class Employee < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships
   
-  def self.with_extension_like(beginning)
-    find :all, :conditions => "extension LIKE \"#{beginning}%\""
+  def available?
+    mobile_number && !on_vacation && CALL_TIMES.include?(current_time_in_timezone.hour)
+  end
+  
+  private
+  
+  def current_time_in_timezone
+    TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
   
 end

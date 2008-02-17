@@ -9,14 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 16) do
+ActiveRecord::Schema.define(:version => 18) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
     t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "deleted_at"
+    t.string   "name"
+    t.string   "message"
   end
 
   create_table "employees", :force => true do |t|
