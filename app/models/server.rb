@@ -5,6 +5,7 @@ class Server < ActiveRecord::Base
   validates_uniqueness_of :name
   
   def call_agent(options)
+    puts "Calling agent"
     actions.create :name    => "call_agent",
                    :message => options.to_yaml
   end

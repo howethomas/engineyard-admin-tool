@@ -15,10 +15,11 @@ class Group < ActiveRecord::Base
   
   def generate_calls(server, customer_cookie)
     available_employees.each do |employee|
+      puts "Creating call for agent #{employee}"
       server.call_agent \
         :phone_number    => employee.mobile_number,
         :customer_cookie => customer_cookie,
-        :employee_id     => employee.id              
+        :employee_id     => employee.id
     end
   end
   
