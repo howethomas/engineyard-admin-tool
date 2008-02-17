@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   
   
   def available_employees
-    employees.select(:available?)
+    employees.select(&:available?)
   end
   
   def generate_calls(server, customer_cookie)
