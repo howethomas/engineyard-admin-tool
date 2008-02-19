@@ -1,23 +1,20 @@
 class SettingManager < ActiveRecord::Base
   
   class << self
-    def for_system
-      find :first, :conditions => "server_id is null"
+    def global
+      find :first, :conditions => "group_id is null"
     end
     
     def [](key)
-      for_system.settings.find_by_key key
+      global.settings[key]
     end
 
     def []=(key, value)
-      search = for_system.settings.find_or_create_by_key key
-      search.key = value
-      search.save
-      value
+      global.settings[key] = value
     end
   end
   
-  belongs_to :server
+  belongs_to :group
   
   has_many :settings do
     
@@ -29,10 +26,6 @@ class SettingManager < ActiveRecord::Base
       self.find_or_create_by_key(key).update_attributes :value => value
     end
     
-  end
-  
-  def for_system?
-    self.server.nil?
   end
   
 end

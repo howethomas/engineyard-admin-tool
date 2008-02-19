@@ -6,8 +6,11 @@ class Group < ActiveRecord::Base
   has_many :memberships
   has_many :employees, :through => :memberships
   
-  alias members employees
+  has_one :setting_manager, :dependent => :destroy
   
+  after_create :create_setting_manager
+  
+  alias members employees
   
   def available_employees
     employees.select(&:available?)
@@ -25,6 +28,12 @@ class Group < ActiveRecord::Base
         :customer_cookie => customer_cookie,
         :employee_id     => employee.id
     end
+  end
+  
+  private
+  
+  def create_setting_manager
+    self.setting_manager = SettingManager.create :group => self
   end
   
 end
