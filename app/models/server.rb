@@ -1,5 +1,7 @@
 class Server < ActiveRecord::Base
   
+  has_one :setting_manager
+  
   has_many :actions
   
   validates_uniqueness_of :name
