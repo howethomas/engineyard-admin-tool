@@ -26,7 +26,8 @@ class Group < ActiveRecord::Base
       server.call_agent \
         :phone_number    => mobile,
         :customer_cookie => customer_cookie,
-        :employee_id     => employee.id
+        :employee_id     => employee.id,
+        :group_id        => self.id
     end
   end
   
