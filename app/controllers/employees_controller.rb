@@ -35,7 +35,10 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find(params[:id])
+    @employee = Employee.find params[:id]
+    @groups = Group.find(:all, :include => :employees).map do |group|
+      [group, group.employees.include?(@employee)]
+    end
   end
 
   # POST /employees

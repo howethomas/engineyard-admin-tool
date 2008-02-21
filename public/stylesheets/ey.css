@@ -141,3 +141,24 @@ div#extension_manager ul li span.name {
 div#extension_manager br, div#extension_manager h2 {
 	clear:left;
 }
+
+div#employee_group_editor {
+	margin-left: 20px;
+}
+
+div#employee_group_editor ul {
+	list-style: none;
+	background-color: white;
+	margin: 0;
+	padding: 4px;
+	padding-left: 10px;
+}
+
+div#employee_group_editor ul li label {
+	padding: 3px;
+}
+
+div#employee_group_editor ul li label:active {
+	color: white;
+	background-color: black;
+}

@@ -32,6 +32,17 @@
   = select_timezone
 
 %p
+  %a{:href => '#', :onclick => "Effect.toggle('employee_group_editor','blind', {duration: 0.1})"} Edit groups
+
+#employee_group_editor{:style => "display:none"}
+  %ul
+    - @groups.each do |(group, checked)|
+    %li
+      = check_box_tag("group_#{group.id}", '1', checked)
+      %label{:for => "group_#{group.id}"}= h(group.name)
+    - end
+
+%p
   = f.submit button_text
 
 - end
