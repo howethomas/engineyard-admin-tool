@@ -17,7 +17,8 @@
 
   - for employee in @employees
   %tr
-    %td{:class => "employee-name"}=h employee.name
+    %td{:class => "employee-name"}
+      %a= link_to h(employee.name), employee_url(employee)
     - @groups.each do |group|
     %td= check_box_tag "membership_#{employee.id}_#{group.id}", '1', employee.groups.include?(group)
     -end
