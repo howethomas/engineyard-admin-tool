@@ -12,7 +12,7 @@
   
     %h1= link_to "Phone System", root_url
 
-    #container
+    #container{:style => @full_size_container ? "width: 96%" : ''}
     
       %p{:style => "color: green"}= flash[:notice]
       

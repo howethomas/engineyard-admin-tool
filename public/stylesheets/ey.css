@@ -90,13 +90,12 @@ h2 span.on-vacation {
 }
 
 table#group-editor {
-	margin: 0 auto;
-	width: 100%;
 }
 
 table#group-editor th {
 	background-color: #a50000;
 	color: white;
+	padding: 3px 10px;
 }
 table#group-editor td {
 	text-align: center;
