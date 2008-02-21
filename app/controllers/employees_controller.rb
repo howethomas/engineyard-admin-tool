@@ -62,7 +62,14 @@ class EmployeesController < ApplicationController
   # PUT /employees/1.xml
   def update
     @employee = Employee.find(params[:id])
-
+    
+    # Reassign groups
+    Membership.destroy_memberships_for_employee @employee
+    params.keys.map(&:to_s).grep(/^group_/).map { |key| Group.find(key[/\d+$/]) }.each do |group|
+      @employee.memberships.create :group => group
+    end
+    @employee.save
+    
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
         flash[:notice] = 'Employee was successfully updated.'

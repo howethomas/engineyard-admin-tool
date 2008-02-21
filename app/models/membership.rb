@@ -3,6 +3,10 @@ class Membership < ActiveRecord::Base
   belongs_to :employee
   belongs_to :group
   
+  def self.destroy_memberships_for_employee(employee)
+    destroy_all "employee_id = #{employee.id}"
+  end
+  
   # The +associations+ argument is a two dimensional array with
   # the second dimension having two indices: the employee id and
   # the group id. e.g. [[44,2][8,1],[19,4]]
