@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.extension_manager 'extension_manager', :controller => "groups", :action => "extension_manager"
-
+  map.group_editor 'group_editor', :controller => "groups", :action => "editor"
   map.resources :groups
 
   map.resources :employees

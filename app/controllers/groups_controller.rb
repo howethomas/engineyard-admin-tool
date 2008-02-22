@@ -1,11 +1,10 @@
 class GroupsController < ApplicationController
   
-  def index
+  def editor
     if request.post?
       associations = params.select { |(key,value)| key =~ /^membership/ }
       Membership.redefine_membership_associations_with normalize_associations(associations)
     end
-    
     @groups = Group.find :all
 
     respond_to do |format|
@@ -17,6 +16,10 @@ class GroupsController < ApplicationController
         render :xml => @groups
       end
     end
+  end
+  
+  def index
+    redirect_to :action => :editor
   end
   
   def extension_manager
@@ -36,7 +39,7 @@ class GroupsController < ApplicationController
   
   def new
     @group = Group.new
-  
+    
     respond_to do |format|
       format.html
       format.xml  { render :xml => @group }
@@ -49,7 +52,7 @@ class GroupsController < ApplicationController
   
   def create
     @group = Group.new(params[:group])
-  
+    
     respond_to do |format|
       if @group.save
         flash[:notice] = 'Group was successfully created.'

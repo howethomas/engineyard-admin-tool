@@ -2,7 +2,7 @@
 
   %h2 Group editor
 
-  = form_tag url_for(:controller => :groups), :method => :post, :name => "memberships" do
+  = form_tag url_for(:controller => :groups, :action => "editor"), :method => :post, :name => "memberships" do
 
   %p
     Specify your employees' memberships below or

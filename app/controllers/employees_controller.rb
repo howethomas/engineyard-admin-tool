@@ -26,7 +26,8 @@ class EmployeesController < ApplicationController
   # GET /employees/new.xml
   def new
     @employee = Employee.new
-
+    @groups   = Group.find(:all).map { |group| [group, false] }
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @employee }
@@ -45,7 +46,9 @@ class EmployeesController < ApplicationController
   # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
-
+    
+    reassign_employee_memberships
+    
     respond_to do |format|
       if @employee.save
         flash[:notice] = 'Employee was successfully created.'
@@ -63,12 +66,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     
-    # Reassign groups
-    Membership.destroy_memberships_for_employee @employee
-    params.keys.map(&:to_s).grep(/^group_/).map { |key| Group.find(key[/\d+$/]) }.each do |group|
-      @employee.memberships.create :group => group
-    end
-    @employee.save
+    reassign_employee_memberships
     
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
@@ -92,6 +90,17 @@ class EmployeesController < ApplicationController
       format.html { redirect_to(employees_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def reassign_employee_memberships
+    @employee.save
+    Membership.destroy_memberships_for_employee @employee
+    params.keys.map(&:to_s).grep(/^group_/).map { |key| Group.find(key[/\d+$/]) }.each do |group|
+      @employee.memberships.create :group => group
+    end
+    @employee.save
   end
   
 end
