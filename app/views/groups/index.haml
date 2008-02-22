@@ -1,0 +1,34 @@
+#group_editor_container
+
+  %h2 Group editor
+
+  = form_tag url_for(:controller => :groups), :method => :post, :name => "memberships" do
+
+  %p
+    Specify your employees' memberships below or
+    = link_to "add a new group", :controller => "groups", :action => "new"
+    \.
+    = submit_tag "Save!"
+  
+  %table#group-editor
+
+    %th Name
+  
+    -for group in @groups
+    %th= h group.name.humanize
+    - end
+
+    - for employee in @employees
+    %tr
+      %td{:class => "employee-name"}
+        %a= link_to h(employee.name), employee_url(employee)
+      - @groups.each do |group|
+      %td= check_box_tag "membership_#{employee.id}_#{group.id}", '1', employee.groups.include?(group)
+      -end
+    - end
+
+  = submit_tag "Save!"
+
+  -end
+
+  /= link_to 'New group', new_group_path

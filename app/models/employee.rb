@@ -3,12 +3,6 @@ class Employee < ActiveRecord::Base
   # SHOULD BE FROM DATABASE!
   CALL_TIMES = 9..17 # 9am to 5pm
   
-  class << self
-    def with_extension_like(beginning)
-      find :all, :conditions => "extension LIKE \"#{beginning}%\""
-    end
-  end
-  
   validates_numericality_of :extension
   validates_presence_of :name, :extension
   

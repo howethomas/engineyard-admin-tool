@@ -18,7 +18,7 @@
   
   <h2>Read-Only</h2>
 
-  <p>Click <%= link_to "here", group_editor_url %> to edit these employees' extensions</p>
+  <p>Click <%= link_to "here", :controller => :groups %> to edit these employees' extensions</p>
 
   <ul id="employees">
   <% for employee in @employees %>

@@ -89,7 +89,12 @@ h2 span.on-vacation {
 	color: #a50000;
 }
 
+#group_editor_container {
+	text-align: center;
+}
+
 table#group-editor {
+	margin: 0 auto;
 }
 
 table#group-editor th {
