@@ -1,12 +1,13 @@
 class Group < ActiveRecord::Base
   
   validates_presence_of :name
-  validates_format_of :name, :with => /^[\w_-]+$/
+  validates_format_of :name, :with => /^[\w\s_-]+$/
+  validates_numericality_of :ivr_option
   
-  has_many :memberships
   has_many :employees, :through => :memberships
   
-  has_one :setting_manager, :dependent => :destroy
+  has_many :memberships,     :dependent => :destroy
+  has_one  :setting_manager, :dependent => :destroy
   
   after_create :create_setting_manager
   

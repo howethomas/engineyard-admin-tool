@@ -102,6 +102,15 @@ table#group-editor th {
 	color: white;
 	padding: 3px 10px;
 }
+table#group-editor th a {
+	color: white;
+}
+table#group-editor tr.even {
+	background-color: #f0f0cd;
+}
+table#group-editor tr.odd {
+	/* default is fine */
+}
 table#group-editor td {
 	text-align: center;
 }

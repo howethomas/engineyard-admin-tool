@@ -1,8 +1,17 @@
-<p>
-  <b>Name:</b>
-  <%=h @group.name %>
-</p>
+<h2><%=h @group.name %> (<%=h(@group.ivr_option) %>)</h2>
+
+<% if @employees.any? %>
+<h3>Members of this group:</h3>
+<ul>
+<% for employee in @employees %>
+<li><%= h(employee.name)%></li>
+<% end %>
+</ul>
+<% else %>
+<h3>This group has no members. <%= link_to "Add some?", :controller => "groups" %></h3>
+<% end %>
 
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Back', groups_path %> |
+<%= link_to 'Delete', @group, :confirm => "Are you sure you wish to delete group #{h(@group.name)} permanently?", :method => :delete %>

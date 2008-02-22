@@ -7,7 +7,6 @@
   %p
     Specify your employees' memberships below or
     = link_to "add a new group", :controller => "groups", :action => "new"
-    \.
     = submit_tag "Save!"
   
   %table#group-editor
@@ -15,11 +14,11 @@
     %th Name
   
     -for group in @groups
-    %th= h group.name.humanize
+    %th= link_to h(group.name.humanize), :controller => "groups", :action => "show", :id => group
     - end
 
     - for employee in @employees
-    %tr
+    %tr{:class => cycle('odd', 'even')}
       %td{:class => "employee-name"}
         %a= link_to h(employee.name), employee_url(employee)
       - @groups.each do |group|

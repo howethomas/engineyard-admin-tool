@@ -20,14 +20,14 @@ class GroupsController < ApplicationController
   end
   
   def extension_manager
-    @groups = Group.find :all# , :order => ''
-    @employees = Employee.find :all
+    @groups    = Group.find :all# , :order => ''
+    @employees = Employee.find(:all, :order => "extension")
     
   end
   
   def show
     @group = Group.find(params[:id])
-  
+    @employees = @group.employees.find(:all, :order => "extension")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @group }
@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         flash[:notice] = 'Group was successfully created.'
-        format.html { redirect_to(@group) }
+        format.html { redirect_to :action => :index }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }

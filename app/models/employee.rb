@@ -6,6 +6,9 @@ class Employee < ActiveRecord::Base
   validates_numericality_of :extension
   validates_presence_of :name, :extension
   
+  validates_numericality_of :extension
+  validates_format_of :mobile_number, :with => /^\d{11}$/
+  
   has_many :memberships
   has_many :groups, :through => :memberships
   
