@@ -9,6 +9,9 @@ class Employee < ActiveRecord::Base
   validates_numericality_of :extension
   validates_format_of :mobile_number, :with => /^\d{11}$/
   
+  after_save    { Action.regen_queues_and_agents! }
+  after_destroy { Action.regen_queues_and_agents! }
+  
   has_many :memberships
   has_many :groups, :through => :memberships
   

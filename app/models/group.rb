@@ -4,6 +4,9 @@ class Group < ActiveRecord::Base
   validates_format_of :name, :with => /^[\w\s_-]+$/
   validates_numericality_of :ivr_option
   
+  after_save    { Action.regen_queues_and_agents! }
+  after_destroy { Action.regen_queues_and_agents! }
+  
   has_many :employees, :through => :memberships
   
   has_many :memberships,     :dependent => :destroy

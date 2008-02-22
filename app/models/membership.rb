@@ -3,6 +3,9 @@ class Membership < ActiveRecord::Base
   belongs_to :employee
   belongs_to :group
   
+  after_save    { Action.regen_queues_and_agents! }
+  after_destroy { Action.regen_queues_and_agents! }
+  
   def self.destroy_memberships_for_employee(employee)
     destroy_all "employee_id = #{employee.id}"
   end
@@ -22,5 +25,7 @@ class Membership < ActiveRecord::Base
     
     valid_memberships
   end
+  
+  private
   
 end
