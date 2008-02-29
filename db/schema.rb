@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 22) do
+ActiveRecord::Schema.define(:version => 24) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 22) do
     t.string   "mobile_number"
     t.boolean  "on_vacation"
     t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
   end
 
   create_table "groups", :force => true do |t|

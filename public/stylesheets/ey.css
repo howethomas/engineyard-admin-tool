@@ -175,3 +175,15 @@ div#employee_group_editor ul li label:active {
 	color: white;
 	background-color: black;
 }
+
+p.password {
+	font-family: monospace;
+	text-align: center;
+	padding: 5px;
+	background-color: white;
+	border: 1px dashed black;
+}
+
+p.origination-test input {
+	width: 140px;
+}

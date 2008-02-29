@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   
+  before_filter :ensure_logged_in
+  
   def editor
     if request.post?
       associations = params.select { |(key,value)| key =~ /^membership/ }

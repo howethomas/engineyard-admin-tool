@@ -1,5 +1,7 @@
 class EmployeesController < ApplicationController
   
+  before_filter :ensure_logged_in, :except => :login
+  
   # GET /employees
   # GET /employees.xml
   def index
@@ -52,13 +54,17 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.save
         flash[:notice] = 'Employee was successfully created.'
-        format.html { redirect_to(@employee) }
+        format.html { redirect_to :action => :next_steps, :id => @employee }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def next_steps
+    @employee = Employee.find(params[:id])
   end
 
   # PUT /employees/1
