@@ -9,10 +9,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'f27b0292d4e6b6dece9f9ffcf9ee1d51'
   
   def ensure_logged_in
-    email, password = session[:email], session[:password]
-    @logged_in_user = Employee.find_by_email_and_encrypted_password(email, password)
-    raise @logged_in_user.inspect
-    redirect_to :controller => "welcome", :action => :login unless @logged_in_user
+    id_from_session = session[:logged_in_employee_id]
+    if id_from_session
+      @logged_in_user = Employee.find id_from_session
+      redirect_to :controller => "welcome", :action => :login unless @logged_in_user
+    else
+      flash[:error] = "You are not logged in!"
+      redirect_to :controller => "welcome", :action => :login unless @logged_in_user
+    end
   end
   
 end

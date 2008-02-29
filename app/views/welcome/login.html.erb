@@ -1,1 +1,19 @@
-Hey, log in now!
+
+
+<% if logged_in? %>
+
+<% else %>
+  <h2> Log in</h2>
+
+  <% form_tag url_for(:controller => "welcome", :action => "login"), :method => :post do |form| %>
+
+  <p><label for="email">EngineYard Email Address</label><br/>
+  <%= text_field_tag "email" %></p>
+
+  <p><label for="password">Password</label><br/>
+  <%= password_field_tag "password" %></p>
+
+  <%= submit_tag "Login!" %>
+
+  <% end %>
+<% end %>

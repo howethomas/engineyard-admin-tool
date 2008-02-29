@@ -15,9 +15,12 @@
     #container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
     
       %p{:style => "color: green"}= flash[:notice]
-      
+      %p{:style => "color: red"}= flash[:error]
       = yield
       
-      %span.powered-by
-        Powered by
-        %a{:href => "http://adhearsion.com"} Adhearsion
+      .footer
+        %span.powered-by
+          Powered by
+          %a{:href => "http://adhearsion.com"} Adhearsion
+          |
+        %span.logout= logout

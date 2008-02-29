@@ -6,7 +6,7 @@ class Employee < ActiveRecord::Base
     
     def authenticate(email, password)
       employee = find_by_email email.downcase
-      employee && employee.authenticated?(password)
+      employee && employee.authenticated?(password) ? employee : false
     end
     
     def new_random_temp_password
@@ -65,6 +65,14 @@ class Employee < ActiveRecord::Base
     end
   end
   
+  def must_change_password?
+    self.salt.blank?
+  end
+  
+  def change_password_to(new_password)
+    self.password = new_password
+  end
+  
   private
   
   def downcase_email
@@ -74,8 +82,10 @@ class Employee < ActiveRecord::Base
   def encrypt_password
     if new_record?
       generate_temporary_password
-    elsif self.salt && self.password
+    elsif self.password && self.salt.blank?
       self.salt      = self.class.random_string
+      self.encrypted_password = self.class.password_with_salt(self.password, self.salt)
+    elsif !self.salt.blank? && !self.password.blank?
       self.encrypted_password = self.class.password_with_salt(self.password, self.salt)
     end
   end

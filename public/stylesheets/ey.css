@@ -45,7 +45,7 @@ a:hover {
 	display: none;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
 	font-size: 18px;
 	
 }
@@ -54,14 +54,13 @@ label {
 	font-weight: bold;
 }
 
-.powered-by {
-	display: block;
+div.footer {
 	text-align: center;
 	color: #d0cfbe;
 	font-size: 11px;
 }
 
-.powered-by a {
+div.footer a {
 	color: #d0cfbe;
 }
 
