@@ -1,0 +1,30 @@
+<h2>Editing Settings</h2>
+
+<p>When the sound file recorder is complete, there will be many more features added here.</p>
+
+<% form_tag url_for(:controller => "settings", :action => "editor"), :method => :post do %>
+
+<%= submit_tag "Save!" %>
+
+<h3>Global Settings</h3>
+
+  <div class="setting_editor" id="global">
+    <% @global_settings.each do |setting| %>
+      <label for="<%= "global_#{setting.id}" %>"><%= setting.key.titleize %>: </label>
+      <%= text_field_tag "global_#{setting.id}", setting.value %><br/>
+    <% end %>  
+  </div>
+  
+  <h3>Settings by Group</h3>
+  
+  <div class="setting_editor">
+    <% @groups.each do |group| %>
+    <h4><%= h group.name.titleize %></h4>
+      <% group.setting_manager.settings.each do |setting| %>
+        <label for="<%= "group_#{group.id}_#{setting.id}" %>"><%= setting.key.titleize %>: </label>
+        <%= text_field_tag "group_#{group.id}_#{setting.id}", setting.value %><br/>
+      <% end %>
+    <% end %>  
+  </div>
+  
+<% end %>
