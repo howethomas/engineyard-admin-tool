@@ -186,3 +186,40 @@ p.password {
 p.origination-test input {
 	width: 140px;
 }
+
+div.setting_editor {
+	margin: 0 10px;
+	font-size: 12px;
+	font-family: monospace;
+	border: 2px solid #b10000;
+	background-color: white;
+	padding: 0 20px;
+}
+
+div.setting_editor label {
+	display: block;
+	float: left;
+	clear: left;
+	width: 140px;
+}
+
+div.setting_editor h4 {
+	clear: left;
+	margin: 0 -20px ;
+	text-align: center;
+	font-size: 16px;
+	background-color: #b10000;
+	color: white;
+}
+
+div.setting_editor input {
+	font-size: 12px;
+	display: block;
+	float: left;
+}
+div.setting_editor br {
+	clear: left;
+}
+div.setting_editor h3 {
+	
+}
