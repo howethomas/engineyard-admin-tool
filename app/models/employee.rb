@@ -23,6 +23,23 @@ class Employee < ActiveRecord::Base
       MD5.md5("#{salt}-ey-#{password}--#{salt.reverse}").to_s
     end
     
+    def next_available_extension
+      all_extensions = Employee.find(:all).map(&:extension).map(&:to_i).sort
+      search = all_extensions.inject do |previous, possibility|
+        if possibility > previous + 1
+          break previous + 1
+        else
+          possibility
+        end
+      end
+      
+      if search == all_extensions.last
+        search + 1
+      else
+        search
+      end
+    end
+    
   end
   
   # SHOULD BE FROM DATABASE!
@@ -32,7 +49,7 @@ class Employee < ActiveRecord::Base
   
   validates_numericality_of :extension
   validates_presence_of :name, :extension, :encrypted_password
-  validates_length_of :password, :within => 4..40
+  validates_length_of :encrypted_password, :within => 4..40
   
   validates_numericality_of :extension
   validates_length_of :mobile_number, :minimum => 10

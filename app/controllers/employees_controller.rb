@@ -27,7 +27,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.new
+    @employee = Employee.new :extension => Employee.next_available_extension
     @groups   = Group.find(:all).map { |group| [group, false] }
     
     respond_to do |format|
