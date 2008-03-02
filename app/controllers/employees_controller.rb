@@ -27,7 +27,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.new :extension => Employee.next_available_extension
+    @employee = Employee.new :extension => Employee.next_available_extension, :encrypted_password => 
     @groups   = Group.find(:all).map { |group| [group, false] }
     
     respond_to do |format|
@@ -49,15 +49,15 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(params[:employee])
     
-    reassign_employee_memberships
-    
     respond_to do |format|
-      if @employee.save
+      if @employee.valid?
+        reassign_employee_memberships
         flash[:notice] = 'Employee was successfully created.'
         format.html { redirect_to :action => :next_steps, :id => @employee }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
       else
-        format.html { render :action => "new" }
+        flash[:error] = @employee.errors.full_messages.join "<br/>" # Fucking gross...
+        format.html { redirect_to :action => "new" }
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
     end

@@ -59,8 +59,7 @@ class Employee < ActiveRecord::Base
   validates_uniqueness_of :email
   
   after_create :generate_temporary_password
-  before_save :encrypt_password, :downcase_email
-  
+  before_validation :encrypt_password, :downcase_email
   
   after_save    { Action.regen_queues_and_agents! }
   after_destroy { Action.regen_queues_and_agents! }
@@ -117,7 +116,7 @@ class Employee < ActiveRecord::Base
   
   def generate_temporary_password
     raise "Salt already set!" if self.salt
-    update_attributes :encrypted_password => self.class.new_random_temp_password
+    self.encrypted_password = self.class.new_random_temp_password
   end
   
 end
