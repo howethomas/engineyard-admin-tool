@@ -85,6 +85,11 @@ class EmployeesController < ApplicationController
       end
     end
   end
+  
+  def call
+    Action.introduce params[:source], params[:destination]
+    render :nothing => true
+  end
 
   # DELETE /employees/1
   # DELETE /employees/1.xml

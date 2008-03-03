@@ -14,6 +14,12 @@
   </p>
 
   <p>
+    <b>Caller ID</b><br />
+    <%= f.text_field :caller_id %><br/>
+    Calls to agents for this group will see this number. Defaults to EngineYard's main number.
+  </p>
+
+  <p>
     <%= f.submit "Create" %>
   </p>
 <% end %>
