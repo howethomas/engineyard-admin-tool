@@ -31,16 +31,14 @@ class Group < ActiveRecord::Base
     employees.select(&:available?)
   end
   
-  def generate_calls(server, customer_cookie)
+  def generate_calls(server)
     available_employees.each do |employee|
       puts "Creating call for agent #{employee}"
       
       mobile = employee.mobile_number
-      mobile = mobile.chop if mobile.starts_with?('+')
       
       server.call_agent \
         :phone_number    => mobile,
-        :customer_cookie => customer_cookie,
         :employee_id     => employee.id,
         :group_id        => self.id
     end
