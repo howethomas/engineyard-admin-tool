@@ -52,7 +52,7 @@ class Employee < ActiveRecord::Base
   validates_length_of :encrypted_password, :within => 4..40
   
   validates_numericality_of :extension
-  validates_length_of :mobile_number, :minimum => 10
+  validates_length_of :mobile_number, :minimum => 10, :allow_nil => true
   
   # The email address is used as a username
   validates_presence_of :email
@@ -89,6 +89,10 @@ class Employee < ActiveRecord::Base
     self.password = new_password
   end
   
+  def current_time_in_timezone
+    TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
+  end
+  
   private
   
   def downcase_email
@@ -108,10 +112,6 @@ class Employee < ActiveRecord::Base
 
   def after_hours?
     CALL_TIMES.include? current_time_in_timezone.hour
-  end
-  
-  def current_time_in_timezone
-    TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
   
   def generate_temporary_password
