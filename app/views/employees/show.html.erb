@@ -10,7 +10,7 @@
 
 <p><strong>Email:</strong> <%=h @employee.email %></p>
 
-<p><strong>Mobile number:</strong> <%= link_to_remote format_phone_number(@employee.mobile_number), :url => { :controller => "employees", :action => "call", :source => @logged_in_user.mobile_number, :destination => @employee.mobile_number } %></p>
+<p><strong>Mobile number:</strong> <%= click_to_dial(@employee.mobile_number) %></p>
 
 <p><strong>Time zone:</strong> <%=h @employee.time_zone %></p>
 

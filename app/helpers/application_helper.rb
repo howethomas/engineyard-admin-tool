@@ -11,9 +11,10 @@ module ApplicationHelper
   
   def format_phone_number(phone_number)
     phone_number = phone_number.to_s
-    return phone_number unless phone_number.length == 11
-    intl, npa, nxx, xxxx = phone_number.match(/^(\d)(\d{3})(\d{3})(\d{4})$/).captures
-    "#{intl} (#{npa}) #{nxx}-#{xxxx}"
+    match = phone_number.match /^1(\d{3})(\d{3})(\d{4})$/
+    return phone_number unless match
+    npa, nxx, xxxx = match.captures
+    "1 (#{npa}) #{nxx}-#{xxxx}"
   end
   
 end
