@@ -1,7 +1,10 @@
 class Setting < ActiveRecord::Base
   
-  belongs_to :setting_manager
+  VALID_SETTING_TYPES = %w[boolean string integer]
   
-  validates_presence_of :key
+  validates_presence_of :name, :kind, :human_name
+  validates_uniqueness_of :name
+  
+  validates_inclusion_of :kind, :in => VALID_SETTING_TYPES, :except => "a"
   
 end

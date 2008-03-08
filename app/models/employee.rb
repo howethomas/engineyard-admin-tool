@@ -54,11 +54,12 @@ class Employee < ActiveRecord::Base
   validates_numericality_of :extension
   validates_length_of :mobile_number, :minimum => 10, :allow_nil => true
   
+  
   # The email address is used as a username
   validates_presence_of :email
   validates_uniqueness_of :email
+  validates_format_of :email, :with => /^[\w\._%-]+@[\w\.-]+\.[a-zA-Z]{2,6}$/
   
-  after_create :generate_temporary_password
   before_validation :encrypt_password, :downcase_email
   
   after_save    { Action.regen_queues_and_agents! }

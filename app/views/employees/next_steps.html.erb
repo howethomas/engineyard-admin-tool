@@ -13,7 +13,7 @@
 
 <p>The password below is meant to be temporary only and is NOT SECURE! Have this user log in with the email address <strong><%= h @employee.email %></strong> and <strong>change it immediately!</strong></p>
 
-<p class="password"><%= h @employee.password %></p>
+<p class="password"><%= h @employee.encrypted_password %></p>
 
 <% end %>
 

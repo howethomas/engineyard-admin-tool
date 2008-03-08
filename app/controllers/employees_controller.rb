@@ -27,7 +27,8 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.new :extension => Employee.next_available_extension, :encrypted_password => 
+    @employee = Employee.new :extension => Employee.next_available_extension
+    @employee.password = Employee.new_random_temp_password
     @groups   = Group.find(:all).map { |group| [group, false] }
     
     respond_to do |format|
@@ -38,7 +39,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find params[:id]
+    @employee ||= Employee.find params[:id]
     @groups = Group.find(:all, :include => :employees).map do |group|
       [group, group.employees.include?(@employee)]
     end
@@ -48,6 +49,8 @@ class EmployeesController < ApplicationController
   # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
+    selected_groups = params.keys.grep(/^group_/).map { |group| group[/^group_(\d+)$/, 1] }
+    @groups = Group.find(:all).map { |group| [group, selected_groups.include?(group.name)] }
     
     respond_to do |format|
       if @employee.valid?
@@ -56,8 +59,7 @@ class EmployeesController < ApplicationController
         format.html { redirect_to :action => :next_steps, :id => @employee }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
       else
-        flash[:error] = @employee.errors.full_messages.join "<br/>" # Fucking gross...
-        format.html { redirect_to :action => "new" }
+        format.html { render :action => :new }
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
     end

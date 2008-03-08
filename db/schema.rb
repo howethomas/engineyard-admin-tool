@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 26) do
+ActiveRecord::Schema.define(:version => 32) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 26) do
     t.datetime "updated_at"
     t.integer  "ivr_option"
     t.string   "caller_id"
+    t.string   "email"
   end
 
   create_table "memberships", :force => true do |t|
@@ -60,13 +61,23 @@ ActiveRecord::Schema.define(:version => 26) do
     t.integer  "group_id"
   end
 
-  create_table "settings", :force => true do |t|
-    t.string   "key"
-    t.string   "value"
-    t.integer  "setting_manager_id"
+  create_table "setting_overrides", :force => true do |t|
+    t.integer  "setting_id"
+    t.string   "type"
+    t.integer  "foreign_id"
+    t.boolean  "enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
+    t.string   "value"
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "human_name"
   end
 
 end

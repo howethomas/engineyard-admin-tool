@@ -1,0 +1,15 @@
+<% def id!() @id = @id ? @id.next : 0 end %>
+
+one:
+  setting_id: 1
+  type: GroupSettingOverride
+  foreign_id: 1
+  enabled: true
+  value: 30
+
+two:
+  setting_id: 2
+  type: GroupSettingOverride
+  foreign_id: 1
+  value: true
+  enabled: true

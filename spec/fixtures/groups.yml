@@ -1,0 +1,9 @@
+<% def id!() @id = @id ? @id.next : 0 end %>
+
+sales:
+  id: <%= id! %>
+  name: Sales
+  caller_id: 1415524444
+  ivr_option: 1
+  created_at: <%= 3.days.ago.to_s(:db) %>
+  updated_at: <%= 2.days.ago.to_s(:db) %>
