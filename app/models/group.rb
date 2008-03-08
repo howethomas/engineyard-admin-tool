@@ -2,10 +2,12 @@ class Group < ActiveRecord::Base
   
   MAIN_ENGINEYARD_NUMBER = 1_866_518_9273
   
-  validates_presence_of :name
-  validates_format_of :name, :with => /^[\w\s_-]+$/
+  validates_presence_of :name, :email
   validates_numericality_of :ivr_option
   validates_length_of :caller_id, :is => 11
+  
+  validates_format_of :name,  :with => /^[\w\s_-]+$/
+  validates_format_of :email, :with => /^[\w\._%-]+@[\w\.-]+\.[a-zA-Z]{2,6}$/
   
   after_save    { Action.regen_queues_and_agents! }
   after_destroy { Action.regen_queues_and_agents! }

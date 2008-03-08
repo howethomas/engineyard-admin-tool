@@ -12,7 +12,11 @@
 <% end %>
 
 
-<p><strong>Caller ID:</strong> <%= format_phone_number @group.caller_id %></p>
+<p><strong>Caller ID:</strong><br/>
+<%= format_phone_number @group.caller_id %></p>
+
+<p><strong>Email:</strong><br/>
+<%= h @group.email %></p>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |

@@ -58,7 +58,7 @@ class Employee < ActiveRecord::Base
   # The email address is used as a username
   validates_presence_of :email
   validates_uniqueness_of :email
-  validates_format_of :email, :with => /^[\w\._%-]+@[\w\.-]+\.[a-zA-Z]{2,6}$/
+  validates_format_of :email, :with => /^[\w\._+%-]+@[\w\.-]+\.[a-zA-Z]{2,6}$/
   
   before_validation :encrypt_password, :downcase_email
   
