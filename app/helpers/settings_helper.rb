@@ -4,7 +4,7 @@ module SettingsHelper
     override = setting.global_setting_override
     id = "global_#{override.id}"
     %<<h5><label for="#{id}">#{setting.human_name}</label></h5>> +
-    text_field_tag("global_#{override.id}", override.value) +
+    send(setting.kind, id, override) +
     '<p>' + h(setting.description) + '</p>'
   end
   
@@ -12,7 +12,7 @@ module SettingsHelper
     override = setting.group_setting_overrides.find_by_foreign_id group.id
     id = "group_#{group.id}_#{setting.id}"
     '<h5>' + check_box_tag("enabled_#{id}", '1', override ? override.enabled : false) + %< <label for="#{id}">#{setting.human_name}</label></h5>> +
-    text_field_tag(id, override ? override.value : '') +
+    send(setting.kind, id, override) +
     '<p>' + h(setting.description) + '</p>'
   end
   
@@ -27,6 +27,26 @@ module SettingsHelper
         JAVASCRIPT
       end
     end.flatten.join("\n") + "</script>"
+  end
+
+  private
+  
+  def string(id, override)
+    text_field_tag(id, override ? override.value : '')
+  end
+  
+  
+  def integer(id, override)
+    string id, override
+  end
+  
+  def boolean(id, override)
+    value = override ? override.value.to_s : ''
+    available_options = ['true', 'false']
+    available_options.unshift '' if override.type != "GlobalSettingOverride"
+    options = available_options.map { |valid| %<<option #{valid == value ? "selected='selected'" : ''} value="#{valid}">#{valid}</option>> }
+    select_tag(id, options.to_s)
+    
   end
   
 end
