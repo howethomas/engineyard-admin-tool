@@ -41,12 +41,13 @@ module SettingsHelper
   end
   
   def boolean(id, override)
+    option_value_translations = {'true' => 'enabled', 'false' => 'disabled'}
+    option_value_translations.default = ''
     value = override ? override.value.to_s : ''
     available_options = ['true', 'false']
     available_options.unshift '' if override.type != "GlobalSettingOverride"
-    options = available_options.map { |valid| %<<option #{valid == value ? "selected='selected'" : ''} value="#{valid}">#{valid}</option>> }
+    options = available_options.map { |valid| %<<option #{valid == value ? "selected='selected'" : ''} value="#{valid}">#{option_value_translations[valid]}</option>> }
     select_tag(id, options.to_s)
-    
   end
   
 end

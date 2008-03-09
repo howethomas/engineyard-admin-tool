@@ -5,8 +5,9 @@ class SettingOverride < ActiveRecord::Base
   belongs_to :setting
   
   validates_presence_of :setting
-  validates_uniqueness_of :setting_id, :scope => :foreign_id
-
+  validates_presence_of :value, :if => :enabled, :message => "cannot be blank when enabled!"
+  
+  validates_uniqueness_of :setting_id, :scope => :foreign_id 
   validate :value_must_match_setting_kind
   
   def human_name
@@ -25,4 +26,5 @@ class SettingOverride < ActiveRecord::Base
       end
     end
   end
+  
 end
