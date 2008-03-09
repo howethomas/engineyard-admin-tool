@@ -14,6 +14,14 @@ class SettingOverride < ActiveRecord::Base
     self.setting.human_name
   end
   
+  def enable!
+    update_attributes :enabled => true
+  end
+  
+  def disable!
+    update_attributes :enabled => false
+  end
+  
   private
   
   def value_must_match_setting_kind

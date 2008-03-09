@@ -29,6 +29,10 @@ class Group < ActiveRecord::Base
     ensure_caller_id_presence
   end
   
+  def settings
+    @setting_accessor ||= GroupSettingAccessor.new(self)
+  end
+  
   def available_employees
     employees.select(&:available?)
   end
@@ -54,6 +58,30 @@ class Group < ActiveRecord::Base
   
   def ensure_caller_id_presence
     self.caller_id = MAIN_ENGINEYARD_NUMBER if caller_id.blank?
+  end
+  
+  class GroupSettingAccessor
+    def initialize(group_instance)
+      @group_instance = group_instance
+    end
+    
+    def method_missing(name, *args, &block)
+      name = name.to_s
+      if name.ends_with? '='
+        setting = Setting.find_by_name name.chop!
+        super unless setting
+        new_override = @group_instance.group_setting_overrides.find_or_create_by_setting_id(setting.id)
+        new_override.value = args.first
+        new_override.enable!
+        new_override.save
+      else
+        setting = Setting.find_by_name name
+        super unless setting
+        query = @group_instance.group_setting_overrides.find_by_setting_id(setting.id)
+        value = query.value
+        (value && !value.blank?) ? value : setting.global_setting_override.value
+      end
+    end
   end
   
 end
