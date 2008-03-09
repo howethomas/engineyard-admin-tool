@@ -6,5 +6,7 @@ class Setting < ActiveRecord::Base
   validates_uniqueness_of :name
   
   validates_inclusion_of :kind, :in => VALID_SETTING_TYPES, :except => "a"
-  
+
+  has_one :global_setting_override
+  has_many :group_setting_overrides
 end

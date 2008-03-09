@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-
+  
   before_filter :ensure_logged_in
   
   GLOBAL_SETTING     = /^global_(\d+)$/
@@ -24,11 +24,8 @@ class SettingsController < ApplicationController
       flash[:notice] = "Settings updated"
     end
     
-    @global_settings = SettingManager.global.settings
-    @groups = Group.find(:all, :include => :setting_manager)
+    @settings = Setting.find(:all)
+    @groups = Group.find(:all, :include => :group_setting_overrides)
   end
-  
-  
-  private
-  
+
 end

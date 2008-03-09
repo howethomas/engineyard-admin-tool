@@ -14,8 +14,8 @@ class Group < ActiveRecord::Base
   
   has_many :employees, :through => :memberships
   
-  has_many :memberships,     :dependent => :destroy
-  has_one  :setting_manager, :dependent => :destroy
+  has_many :memberships,             :dependent => :destroy
+  has_many :group_setting_overrides, :dependent => :destroy, :foreign_key => "foreign_id"
   
   after_create :create_setting_manager
   

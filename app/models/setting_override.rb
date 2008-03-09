@@ -6,5 +6,9 @@ class SettingOverride < ActiveRecord::Base
   
   validates_presence_of :setting, :value
   validates_uniqueness_of :setting_id, :scope => :foreign_id
+
+  def human_name
+    self.setting.human_name
+  end
   
 end
