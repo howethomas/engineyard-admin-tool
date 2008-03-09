@@ -183,43 +183,61 @@ p.password {
 	border: 1px dashed black;
 }
 
-p.origination-test input {
-	width: 140px;
+div#global_settings {
+	margin-top: 15px;
+	border-color: blue;
+}
+
+.setting-error {
+	background-color: red;
+	border: 2px dotted black;
+	padding: 2px;
+}
+.setting-error-description {
+	color: red;
+}
+
+div#global_settings p {
+	margin-top: 3px;
+	font-size: 13px;
+}
+
+div#global_settings h4 {
+	background-color: blue;
+}
+
+div#global_settings input[type=text] {
+	width: 75px;
 }
 
 div.setting_editor {
-	margin: 0 10px;
-	font-size: 12px;
-	font-family: monospace;
 	border: 2px solid #b10000;
 	background-color: white;
-	padding: 0 20px;
-}
-
-div.setting_editor label {
-	display: block;
-	float: left;
-	clear: left;
-	width: 140px;
+	padding: 0 5px;
+	margin-bottom: 15px;
 }
 
 div.setting_editor h4 {
-	clear: left;
-	margin: 0 -20px ;
 	text-align: center;
 	font-size: 16px;
 	background-color: #b10000;
 	color: white;
+	margin: 0 -5px 0 -5px;
+	padding: 4px 0;
 }
 
-div.setting_editor input {
+h5 {
+	font-size: 16px;
+	margin: 10px 0 0 0;
+}
+
+div.setting_editor input[type=text] {
 	font-size: 12px;
 	display: block;
-	float: left;
+	width: 75px;
 }
-div.setting_editor br {
-	clear: left;
-}
-div.setting_editor h3 {
-	
+
+div.setting_editor p {
+	margin-top: 3px;
+	font-size: 13px;
 }

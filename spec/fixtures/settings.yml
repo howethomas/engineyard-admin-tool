@@ -27,3 +27,10 @@ call_receive_time_end:
   kind: integer
   description: This is the time of day (hour) at which calls should stop being sent to employees.
   human_name: Stop receiving calls at
+
+string_setting:
+  id: <%= id! %>
+  name: string_setting
+  kind: string
+  description: This was just added to the fixtures so I could test strings (like sound file names)
+  human_name: Test string setting

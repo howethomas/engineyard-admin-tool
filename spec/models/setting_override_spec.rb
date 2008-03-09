@@ -25,13 +25,34 @@ describe GroupSettingOverride do
   it "should be valid with a group and setting" do
     override.group   = groups(:sales)
     override.setting = settings(:queue_timeout)
-    override.value   = "foobar"
+    override.value   = "123"
     override.should be_valid
   end
   
   it "should not be valid without a group" do
     override.setting = settings(:queue_timeout)
     override.should have(1).error_on(:group)
+  end
+  
+  it "should not allow a non-numerical String in an 'integer' override" do
+    override.group   = groups(:sales)
+    override.setting = settings(:queue_timeout) # Integer override
+    override.value   = "foobar"
+    override.should have(1).error_on(:value)
+  end
+  
+  it "should not allow a non-boolean String in an 'boolean' override" do
+    override.group   = groups(:sales)
+    override.setting = settings(:allow_star_to_hangup) # Boolean override
+    override.value   = "thisisnotfalse"
+    override.should have(1).error_on(:value)
+  end
+  
+  it "should allow just about anything in an override for a 'string'" do
+    override.group   = groups(:sales)
+    override.setting = settings(:string_setting) # Boolean override
+    override.value   = "12321 true askdfaskm"
+    override.should have(0).errors_on(:value)
   end
   
 end

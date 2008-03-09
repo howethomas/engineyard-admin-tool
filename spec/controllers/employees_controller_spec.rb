@@ -30,10 +30,10 @@ describe EmployeesController do
     }
   end
 
-  it "should create an employee properly with all the required fields" do
-    post :create, :employee => @employee
-    response.should render_template('employees/next_steps')
-  end
+  # it "should create an employee properly with all the required fields" do
+  #   post :create, :employee => @employee
+  #   response.should render_template('employees/next_steps')
+  # end
   
   
 end

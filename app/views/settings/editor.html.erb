@@ -6,25 +6,27 @@
 
 <%= submit_tag "Save!" %>
 
-<h3>Global Settings</h3>
-
-  <div class="setting_editor" id="global">
-    <% @settings.each do |setting| %>
-      <label for="<%= "global_#{setting.global_setting_override.id}" %>"><%= setting.human_name %>: </label>
-      <%= text_field_tag "global_#{setting.global_setting_override.id}", setting.global_setting_override.value %><br/>
-    <% end %>  
+  <div class="setting_editor" id="global_settings">
+  <h4>Global Settings</h4>
+  <% @settings.each do |setting| %>
+    <%= global_setting(setting) %>
+  <% end %>
   </div>
   
   <h3>Settings by Group</h3>
   
-  <div class="setting_editor">
-    <% @groups.each do |group| %>
-    <h4><%= h group.name.titleize %></h4>
-      <% group.group_setting_overrides.each do |override| %>
-        <label for="<%= "group_#{group.id}_#{override.id}" %>"><%= override.human_name %>: </label>
-        <%= text_field_tag "group_#{group.id}_#{override.id}", override.value %><br/>
-      <% end %>
-    <% end %>  
-  </div>
   
+  <% @groups.each do |group| %>
+  <div class="setting_editor">
+  <h4><%= h group.name %></h4>
+  <% @settings.each do |setting| %>
+  <%= group_setting(setting, group) %>
+  <% end %>
+  </div>
+  <% end %>
+  
+<%= submit_tag "Save!" %>
+
 <% end %>
+
+<%= highlight_errors @save_errors if @save_errors.any? %>
