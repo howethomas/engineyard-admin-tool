@@ -94,7 +94,15 @@ class Employee < ActiveRecord::Base
     TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
   
+  def after_hours?
+    availability_range.include? current_time_in_timezone.hour
+  end
+  
   private
+  
+  def availability_range
+    group.settings.call_receive_time_start.to_s..group.settings.call_receive_time_end
+  end
   
   def downcase_email
     self.email &&= email.downcase
@@ -111,10 +119,6 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  def after_hours?
-    CALL_TIMES.include? current_time_in_timezone.hour
-  end
-  
   def generate_temporary_password
     raise "Salt already set!" if self.salt
     self.encrypted_password = self.class.new_random_temp_password

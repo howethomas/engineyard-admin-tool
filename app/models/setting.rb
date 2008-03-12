@@ -10,6 +10,4 @@ class Setting < ActiveRecord::Base
   has_one :global_setting_override
   has_many :group_setting_overrides
   
-  private
-  
 end
