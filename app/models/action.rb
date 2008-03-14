@@ -10,7 +10,7 @@ class Action < ActiveRecord::Base
     end
     
     def regen_queues_and_agents!
-      regenerate_config_file 'agents', 'queues'
+      regenerate_config_file 'agents', 'queues', 'voicemail'
     end
     
     def introduce(source, destination)
