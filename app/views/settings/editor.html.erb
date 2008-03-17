@@ -20,6 +20,7 @@
   <div class="setting_editor">
   <h4><%= h group.name %></h4>
   <% @settings.each do |setting| %>
+  <% next if setting.global_only %>
   <%= group_setting(setting, group) %>
   <% end %>
   </div>

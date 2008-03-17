@@ -15,12 +15,11 @@ class SettingsController < ApplicationController
       enabled_params = params.select { |(key, value)| key.starts_with? 'enabled' } || []
       enabled_params.map! { |(key, value)| key[/^enabled_(.+)$/,1] }
       
-      
-      
       global_params.each do |(key, value)|
-        setting_id = key[GLOBAL_SETTING,1]
-        override   = GlobalSettingOverride.find_or_create_by_setting_id(setting_id)
+        override_id    = key[GLOBAL_SETTING,1]
+        override       = GlobalSettingOverride.find(override_id)
         override.value = value
+        p override
         unless override.save
           @save_errors << {:id => key, :errors => override.errors.full_messages}
         end
