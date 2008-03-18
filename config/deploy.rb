@@ -1,6 +1,7 @@
+PRODUCTION_SERVERS = %w[65.74.174.200 65.74.174.199]
+VM_AHN_SERVERS = '192.168.2.223'
+
 set :application, "pbx-gui"
-set :user, "jicksta" # Must change to 'deploy'!
-set :use_sudo, false
 
 # Git/Github setup
 set :scm, :git
@@ -10,12 +11,20 @@ set :project_deploy_to_root, "/usr/local/engineyard"
 
 set :deploy_to, "#{project_deploy_to_root}/#{application}"
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-
 set :main_server, "192.168.2.3"
 
-role :app, main_server
-role :web, main_server
 # role :db,  "your db-server here", :primary => true
+
+task :production do
+  set :user, "root" # Must change to 'deploy'!
+  set :use_sudo, false
+  role :app, *PRODUCTION_SERVERS
+  role :web, *PRODUCTION_SERVERS
+end
+
+task :vm do
+  set :user, 'jicksta'
+  set :use_sudo, true
+  role :app, *VM_AHN_SERVERS
+  role :web, *VM_AHN_SERVERS
+end

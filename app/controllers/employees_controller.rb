@@ -83,7 +83,10 @@ class EmployeesController < ApplicationController
         format.html { redirect_to(@employee) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html do
+          flash[:error] = @employee.errors.full_messages
+          redirect_to :action => "edit"
+        end
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
     end

@@ -50,6 +50,10 @@ class Group < ActiveRecord::Base
     end
   end
   
+  def empty?
+    self.employees.count.zero?
+  end
+  
   private
   
   def create_setting_manager
