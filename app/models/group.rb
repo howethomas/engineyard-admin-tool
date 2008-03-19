@@ -34,7 +34,7 @@ class Group < ActiveRecord::Base
   end
   
   def available_employees
-    employees.select(&:available?)
+    employees.select { |employee| employee.available?(self) }
   end
   
   def generate_calls(server)

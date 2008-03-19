@@ -69,10 +69,6 @@ class Employee < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships
   
-  def available?
-    mobile_number && !on_vacation && (RAILS_ENV == 'production' ? after_hours? : true)
-  end
-  
   def authenticated?(password)
     if self.salt
       self.encrypted_password == self.class.password_with_salt(password, self.salt)
@@ -94,14 +90,18 @@ class Employee < ActiveRecord::Base
     TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
   
-  def after_hours?
-    availability_range.include? current_time_in_timezone.hour
+  def available?(for_group)
+    mobile_number && !on_vacation && (RAILS_ENV == 'production' ? !after_hours?(for_group) : true)
+  end
+  
+  def after_hours?(for_group)
+    ! availability_range(for_group).include?(current_time_in_timezone.hour)
   end
   
   private
   
-  def availability_range
-    group.settings.call_receive_time_start.to_s..group.settings.call_receive_time_end
+  def availability_range(for_group)
+    for_group.settings.call_receive_time_start.to_i..for_group.settings.call_receive_time_end.to_i
   end
   
   def downcase_email
