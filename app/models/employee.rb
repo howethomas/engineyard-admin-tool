@@ -95,7 +95,7 @@ class Employee < ActiveRecord::Base
   end
   
   def after_hours?(for_group)
-    ! availability_range(for_group).include?(current_time_in_timezone.hour)
+    not availability_range(for_group).include?(current_time_in_timezone.hour)
   end
   
   private
