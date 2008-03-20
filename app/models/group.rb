@@ -37,8 +37,14 @@ class Group < ActiveRecord::Base
     employees.select { |employee| employee.available?(self) }
   end
   
-  def generate_calls(server)
-    available_employees.each do |employee|
+  def generate_calls(server, options={})
+    exclusions = Array(options[:exclude]).map(&:to_s)
+    puts "Not calling these guys:"
+    p exclusions
+    employees_to_call = available_employees.reject { |employee| exclusions.include?(employee.id.to_s) }
+    puts "These are the guys I'm going to call: #{employees_to_call.inspect}"
+    
+    employees_to_call.each do |employee|
       puts "Creating call for agent #{employee}"
       
       mobile = employee.mobile_number
