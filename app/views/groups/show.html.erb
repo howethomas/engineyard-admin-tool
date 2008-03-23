@@ -15,9 +15,6 @@
 <p><strong>Caller ID:</strong><br/>
 <%= format_phone_number @group.caller_id %></p>
 
-<p><strong>Email:</strong><br/>
-<%= h @group.email %></p>
-
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |
 <%= link_to 'Delete', @group, :confirm => "Are you sure you wish to delete group #{h(@group.name)} permanently?", :method => :delete %>

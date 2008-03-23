@@ -26,6 +26,8 @@ describe GroupSettingOverride do
     override.group   = groups(:sales)
     override.setting = settings(:queue_timeout)
     override.value   = "123"
+    override.valid?
+    y override.errors
     override.should be_valid
   end
   

@@ -19,7 +19,6 @@ class SettingsController < ApplicationController
         override_id    = key[GLOBAL_SETTING,1]
         override       = GlobalSettingOverride.find(override_id)
         override.value = value
-        p override
         unless override.save
           @save_errors << {:id => key, :errors => override.errors.full_messages}
         end
@@ -30,6 +29,7 @@ class SettingsController < ApplicationController
         group = Group.find group_id
         override = group.group_setting_overrides.find_or_create_by_setting_id(setting_id)
         override.value = value
+        override.group = group
         override.enabled = enabled_params.include? key
         unless override.save
           @save_errors << {:id => key, :errors => override.errors.full_messages}
@@ -39,13 +39,12 @@ class SettingsController < ApplicationController
       if @save_errors.empty?
         flash.now[:notice] = "Settings updated"
       else
-        # raise @save_errors.inspect
         flash.now[:error] = "Error saving all data! Review and correct the errors below."
       end
     end
     
-    @settings = Setting.find(:all)
-    @groups = Group.find(:all, :include => :group_setting_overrides)
+    @settings = Setting.find :all, :include => :global_setting_override
+    @groups = Group.find :all, :include => :group_setting_overrides
   end
 
 end
