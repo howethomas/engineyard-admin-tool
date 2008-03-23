@@ -1,27 +1,11 @@
-<% if @employee.salt %>
+<h3>Creation Complete!</h3>
 
-<h3>First step completed!</h3>
+<p>An email has been sent to <strong><%=h @employee.email %></strong> with a temporary password.</p>
 
-<p>This user has already changed his or her password.</p>
+<p>When <strong><%=h @employee.name %></strong> logs in for the first time, he or she will be prompted to change the password to something reasonably secure.</p>
 
-<% else %>
+<h3>Testing the Phone Number</h3>
 
-<h2>Next steps!</h2>
+<p><%= click_to_dial(@employee.mobile_number, :link_text => "Call " + format_phone_number(@employee.mobile_number)) %></p>
 
-<h3>Change temporary password</h3>
-<p>For <%= h @employee.name %> to log into this system, you must have this user change his or her password!</p>
-
-<p>The password below is meant to be temporary only and is NOT SECURE! Have this user log in with the email address <strong><%= h @employee.email %></strong> and <strong>change it immediately!</strong></p>
-
-<p class="password"><%= h @employee.encrypted_password %></p>
-
-<% end %>
-
-<h3>Test phone number</h3>
-
-<p>Additionally, you should test this user's mobile number now.</p>
-
-<!-- FORM EDITOR HERE WITH TWO TEXT FIELDS OF NUMBERS TO CONNECT. ONE SHOULD BE AUTO POPULATED WITH THE NUMBER OF THE CURRENTLY LOGGED IN PERSON -->
-
-<p class="origination-test">Place a call from <input type="text"></input> to <input type="text"></input>.</p>
-
+<p>Sometimes a phone number is improperly formatted and therefore unreachable by the system. You can test the number you gave the system by clicking the link above.</p>

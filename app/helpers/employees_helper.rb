@@ -8,8 +8,9 @@ module EmployeesHelper
   end
 
   def click_to_dial(mobile_number, options={})
+    link_text = options.delete(:link_text) || format_phone_number(mobile_number)
     link_to_remote(
-      format_phone_number(mobile_number),
+      link_text,
       :url => {
         :controller => "employees", :action => "call",
         :source => @logged_in_user.mobile_number,
