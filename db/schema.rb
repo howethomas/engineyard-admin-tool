@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 34) do
+ActiveRecord::Schema.define(:version => 35) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 34) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "salt"
+    t.boolean  "admin"
   end
 
   create_table "groups", :force => true do |t|

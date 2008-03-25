@@ -1,5 +1,5 @@
 PRODUCTION_SERVERS = %w[65.74.174.200 65.74.174.199]
-VM_AHN_SERVERS = '192.168.2.223'
+VM_AHN_SERVERS = '10.0.1.194'
 
 set :application, "pbx-gui"
 
@@ -23,8 +23,22 @@ task :production do
 end
 
 task :vm do
-  set :user, 'jicksta'
-  set :use_sudo, true
+  set :user, 'deploy'
   role :app, *VM_AHN_SERVERS
   role :web, *VM_AHN_SERVERS
+end
+
+namespace :deploy do
+  task :start do
+    run 'thin start -C /etc/thin/pbx_gui.yml'
+  end
+  
+  task :stop do
+    run 'thin stop -C /etc/thin/pbx_gui.yml'
+  end
+  
+  task :restart do
+    stop
+    start
+  end
 end
