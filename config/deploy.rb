@@ -15,8 +15,13 @@ set :main_server, "192.168.2.3"
 
 # role :db,  "your db-server here", :primary => true
 
+after 'deploy', 'ignore_development_actions'
 after 'deploy', 'restart_messaging_system'
 after 'deploy', 'restart_adhearsion'
+
+task :delete_development_actions do
+  run %% sqlite3 #{deploy_to}/current/db/development.sqlite 'delete from actions'%
+end
 
 task :restart_messaging_system do
   run '/etc/init.d/ahn_queue_fetcher restart'
