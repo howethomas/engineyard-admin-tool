@@ -23,7 +23,7 @@ task :restart_messaging_system do
 end
 
 task :restart_adhearsion do
-  run 'etc/init.d/adhearsion restart'
+  run '/etc/init.d/adhearsion restart'
 end
 
 task :production do
