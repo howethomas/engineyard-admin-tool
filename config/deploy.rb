@@ -16,9 +16,14 @@ set :main_server, "192.168.2.3"
 # role :db,  "your db-server here", :primary => true
 
 after 'deploy', 'restart_messaging_system'
+after 'deploy', 'restart_adhearsion'
 
 task :restart_messaging_system do
   run '/etc/init.d/ahn_queue_fetcher restart'
+end
+
+task :restart_adhearsion do
+  run 'etc/init.d/adhearsion restart'
 end
 
 task :production do
