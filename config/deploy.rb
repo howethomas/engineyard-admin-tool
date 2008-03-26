@@ -15,6 +15,12 @@ set :main_server, "192.168.2.3"
 
 # role :db,  "your db-server here", :primary => true
 
+after 'deploy', 'restart_messaging_system'
+
+task :restart_messaging_system do
+  run '/etc/init.d/ahn_queue_fetcher restart'
+end
+
 task :production do
   set :user, "root" # Must change to 'deploy'!
   set :use_sudo, false
