@@ -15,12 +15,18 @@ set :main_server, "192.168.2.3"
 
 # role :db,  "your db-server here", :primary => true
 
+# before 'deploy', 'commit_remote_database_changes'
 after 'deploy', 'delete_development_actions'
 after 'deploy', 'restart_messaging_system'
 after 'deploy', 'restart_adhearsion'
 
+task :commit_remote_database_changes do
+  run "cd #{deploy_to}/current && git commit -m 'Capistrano: Committing web app database changes' --only db/development.sqlite3; git push"
+  exec "git pull"
+end
+
 task :delete_development_actions do
-  run %% sqlite3 #{deploy_to}/current/db/development.sqlite 'delete from actions'%
+  run %% sqlite3 #{deploy_to}/current/db/development.sqlite3 'delete from actions'%
 end
 
 task :restart_messaging_system do
