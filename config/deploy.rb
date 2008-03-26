@@ -15,7 +15,7 @@ set :main_server, "192.168.2.3"
 
 # role :db,  "your db-server here", :primary => true
 
-after 'deploy', 'ignore_development_actions'
+after 'deploy', 'delete_development_actions'
 after 'deploy', 'restart_messaging_system'
 after 'deploy', 'restart_adhearsion'
 
