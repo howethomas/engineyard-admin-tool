@@ -9,3 +9,5 @@
 <p><%= click_to_dial(@employee.mobile_number, :link_text => "Call " + format_phone_number(@employee.mobile_number)) %></p>
 
 <p>Sometimes a phone number is improperly formatted and therefore unreachable by the system. You can test the number you gave the system by clicking the link above.</p>
+
+<p><%= link_to "View this employee", @employee %> | <%= "Group Editor", group_editor_url %></p>
