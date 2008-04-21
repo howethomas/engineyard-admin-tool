@@ -13,7 +13,7 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 config.action_mailer.delivery_method :sendmail
-config.action_mailer.sendmail_settings :location => "/usr/sbin/exim"
+config.action_mailer.sendmail_settings :location => "/usr/sbin/sendmail"
 config.action_mailer.perform_deliveries true
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
