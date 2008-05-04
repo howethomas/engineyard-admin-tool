@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   
-  before_filter :ensure_logged_in, :except => :login
+  before_filter :ensure_logged_in, :except => [:login, :forgot_password, :reset_password]
   
   def index
   end
@@ -18,7 +18,7 @@ class WelcomeController < ApplicationController
         # Both an email and a password were given!
         valid_employee = Employee.authenticate(email, password)
         if valid_employee
-          session[:logged_in_employee_id] = valid_employee.id
+          set_logged_in_employee valid_employee
           redirect_to :action => "index"
         else
           flash[:error] = "Incorrect email address or password!"
@@ -31,6 +31,32 @@ class WelcomeController < ApplicationController
   def logout
     session[:logged_in_employee_id] = nil
     redirect_to :action => "login"
+  end
+  
+  def forgot_password
+    email_address = params['username_of_forgotten_password']
+    employee = Employee.find_by_email email_address.downcase
+    if employee
+      token = employee.create_password_reset_token
+      PasswordMailer.deliver_password_reassignment(employee, token)
+      flash[:notice] = "You have been sent an email with a password reset link!"
+      redirect_to :action => "login"
+    else
+      flash[:error] = "This email address is not in our system!"
+      redirect_to :action => "login"
+    end
+  end
+  
+  def reset_password
+    token = params[:token]
+    if employee = Employee.find_by_password_reset_token(token)
+      set_logged_in_employee employee
+      employee.reset_password
+      employee.save
+      redirect_to :action => "index"
+    else
+      render :text => "Invalid reset token!", :status => 404
+    end
   end
   
   def change_password
@@ -48,6 +74,12 @@ class WelcomeController < ApplicationController
       end
     end
     redirect_to :back
+  end
+  
+  private
+  
+  def set_logged_in_employee(employee)
+    session[:logged_in_employee_id] = employee.id
   end
   
 end

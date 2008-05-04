@@ -48,7 +48,7 @@ class Employee < ActiveRecord::Base
   attr_accessor :password
   
   validates_numericality_of :extension
-  validates_presence_of :name, :extension, :encrypted_password
+  validates_presence_of :name, :extension, :encrypted_password, :voicemail_pin
   validates_length_of :encrypted_password, :within => 4..40
   
   validates_numericality_of :extension
@@ -86,6 +86,12 @@ class Employee < ActiveRecord::Base
     self.password = new_password
   end
   
+  def create_password_reset_token
+    returning self.class.random_string(100) do |token|
+      update_attributes :password_reset_token => token
+    end
+  end
+  
   def current_time_in_timezone
     TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
@@ -96,6 +102,12 @@ class Employee < ActiveRecord::Base
   
   def after_hours?(for_group)
     not availability_range(for_group).include?(current_time_in_timezone.hour)
+  end
+  
+  def reset_password
+    self.password_reset_token, self.salt = nil
+    self.encrypted_password = Employee.new_random_temp_password
+    self.save
   end
   
   private

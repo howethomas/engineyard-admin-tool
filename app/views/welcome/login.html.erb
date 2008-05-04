@@ -16,4 +16,10 @@
   <%= submit_tag "Login!" %>
 
   <% end %>
+  
+  <% form_tag url_for('forgot_password'), :method => :post, :id => "forgot_password_form" do |form| %>
+  <%= link_to "Forgot your password?", "javascript:forgotPassword('#{forgot_password_url}')" %>
+  <%= hidden_field_tag 'username_of_forgotten_password' %>
+  <% end %>
+  
 <% end %>

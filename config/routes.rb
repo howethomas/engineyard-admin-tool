@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   
+  map.forgot_password 'forgotpassword', :controller => "welcome", :action => "forgot_password"
+  map.reset_password  'reset/:token', :controller => "welcome", :action => "reset_password"
+  
   map.extension_manager 'extension_manager', :controller => "groups", :action => "extension_manager"
   map.group_editor 'group_editor', :controller => "groups", :action => "editor"
   map.logout 'logout', :controller => "welcome", :action => "logout"

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 35) do
+ActiveRecord::Schema.define(:version => 37) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 35) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin"
+    t.integer  "voicemail_pin"
+    t.string   "password_reset_token"
   end
 
   create_table "groups", :force => true do |t|
