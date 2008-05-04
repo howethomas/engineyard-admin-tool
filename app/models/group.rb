@@ -48,9 +48,9 @@ class Group < ActiveRecord::Base
       mobile = employee.mobile_number
       
       server.call_agent \
-        :phone_number    => mobile,
-        :employee_id     => employee.id,
-        :group_id        => self.id
+        :phone_number => mobile,
+        :employee_id  => employee.id,
+        :group_id     => self.id
     end
   end
   
