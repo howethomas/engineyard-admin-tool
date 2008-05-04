@@ -11,6 +11,6 @@ function forgotPassword(url) {
     $('username_of_forgotten_password').value = email_address;
     form.submit();
   } else {
-    alert("Please enter your @engineyard.com email in the textbox above!");
+    alert("Please enter your @engineyard.com email in the textbox above and then click this link.");
   }
 }
