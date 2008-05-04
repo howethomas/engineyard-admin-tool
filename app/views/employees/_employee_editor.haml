@@ -28,13 +28,13 @@
 %p
   %label{:for => "employee_email"} Email
   %br
+  This will be used as the employee's login username. It should be an @engineyard.com address.
+  %br
   = f.text_field :email
 
 
 %p
   %label{:for => "employee_time_zone"} Time zone
-  %br
-  This will be used as the employee's login username. It should be an @engineyard.com address.
   %br
   = select_timezone
 
