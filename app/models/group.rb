@@ -35,6 +35,7 @@ class Group < ActiveRecord::Base
   end
   
   def generate_calls(server, options={})
+    ahn_log "Inside generate_calls!" if respond_to?(:ahn_log)
     exclusions = Array(options[:exclude]).map(&:to_s)
     puts "Not calling these guys:"
     p exclusions
