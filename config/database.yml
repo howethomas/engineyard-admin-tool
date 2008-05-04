@@ -18,4 +18,4 @@ production:
   username: pbx_db_acc
   password: qn9bNUBTtE
   database: pbx
-  hostname: 192.168.88.14
+  host: 192.168.88.14
