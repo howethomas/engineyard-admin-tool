@@ -9,6 +9,12 @@ class Action < ActiveRecord::Base
       end
     end
     
+    def regenerate_email_aliases!
+      with_each_server do |server|
+        create :server => server, :name => "regenerate_email_aliases"
+      end
+    end
+    
     def regen_queues_and_agents!
       regenerate_config_file 'agents', 'queues', 'voicemail'
     end

@@ -3,8 +3,14 @@ class Membership < ActiveRecord::Base
   belongs_to :employee
   belongs_to :group
   
-  after_save    { Action.regen_queues_and_agents! }
-  after_destroy { Action.regen_queues_and_agents! }
+  after_save do
+    Action.regen_queues_and_agents!
+    Action.regenerate_email_aliases!
+  end
+  after_destroy do
+    Action.regen_queues_and_agents!
+    Action.regenerate_email_aliases!
+  end
   
   def self.destroy_memberships_for_employee(employee)
     destroy_all "employee_id = #{employee.id}"
