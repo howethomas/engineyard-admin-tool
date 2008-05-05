@@ -104,7 +104,7 @@ class EmployeesController < ApplicationController
     @employee.destroy
 
     respond_to do |format|
-      format.html { redirect_to extension_manager_url }
+      format.html { redirect_to employees_url }
       format.xml  { head :ok }
     end
   end
