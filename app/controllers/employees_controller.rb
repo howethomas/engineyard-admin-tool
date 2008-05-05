@@ -54,8 +54,8 @@ class EmployeesController < ApplicationController
     
     respond_to do |format|
       if @employee.valid?
-        PasswordMailer.deliver_new_password(@employee)
         reassign_employee_memberships # saves the employee
+        PasswordMailer.deliver_new_password(@employee)
         flash[:notice] = 'Employee was successfully created.'
         format.html { redirect_to :action => :next_steps, :id => @employee }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
@@ -104,7 +104,7 @@ class EmployeesController < ApplicationController
     @employee.destroy
 
     respond_to do |format|
-      format.html { redirect_to(employees_url) }
+      format.html { redirect_to extension_manager_url }
       format.xml  { head :ok }
     end
   end
