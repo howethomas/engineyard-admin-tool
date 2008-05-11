@@ -1,0 +1,20 @@
+<table id="availability_editor">
+  <tr>
+    <th></th>
+    <th>Sunday</th>    
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+  </tr>
+  <% employee.availability_rules.transpose.each_with_index do |hours_of_day,hour| %>
+  <tr>
+    <td><%= humanize_hour(hour) %></td>
+    <% hours_of_day.each_with_index do |day_of_week,day| %>
+    <td onClick="javascript:availabilityRuleCellClicked(this)" class="<%= day_of_week ? 'checked' : 'unchecked' %>"><%= check_box_tag "available_#{day}_#{hour}", 'true', day_of_week, "onClick" => 'javascript:availabilityRuleClicked(this)' %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>

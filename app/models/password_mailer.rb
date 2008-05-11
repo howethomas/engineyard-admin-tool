@@ -6,7 +6,7 @@ class PasswordMailer < ActionMailer::Base
     if email = employee.email
       recipients email
       from "pbx@engineyard.com"
-      subject "EngineYard Phone System Account Created!"
+      subject "Engine Yard Phone System Account Created!"
       
       body :name => employee.name, :password => employee.encrypted_password
     end
@@ -16,7 +16,7 @@ class PasswordMailer < ActionMailer::Base
     if email = employee.email
       recipients email
       from "pbx@engineyard.com"
-      subject "EngineYard Phone System Password Reset!"
+      subject "Engine Yard Phone System Password Reset!"
       
       body :token => reset_token, :name => employee.name
     end

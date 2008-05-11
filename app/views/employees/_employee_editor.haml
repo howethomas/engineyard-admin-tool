@@ -28,7 +28,7 @@
 %p
   %label{:for => "employee_email"} Email
   %br
-  This will be used as the employee's login username. It should be an @engineyard.com address.
+  This will be used as the employee's login username.
   %br
   = f.text_field :email
 
@@ -48,6 +48,13 @@
       = check_box_tag("group_#{group.id}", '1', checked)
       %label{:for => "group_#{group.id}"}= h(group.name)
     - end
+
+%p
+  %a{:href => '#', :onclick => "Effect.toggle('availability_editor_container','blind', {duration: 0.1})"} Edit availability
+
+
+#availability_editor_container{:style => 'display: none'}
+  = render :partial => "availability_editor", :locals => {:employee => @employee}
 
 %p
   = f.submit button_text

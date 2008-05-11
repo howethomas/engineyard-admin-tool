@@ -27,7 +27,7 @@ h1 a:hover {
 	font-family: Tahoma, "Trebuchet MS", Arial;
 	margin: 0 auto;
 	padding: 0 10px 10px 10px;
-	width: 480px;
+	width: 580px;
 	background: #f2f2d5;
 }
 a {
@@ -240,4 +240,24 @@ div.setting_editor input[type=text] {
 div.setting_editor p {
 	margin-top: 3px;
 	font-size: 13px;
+}
+
+div#availability_editor {
+  
+}
+
+#availability_editor tr td, #availability_editor tr td input {
+  cursor: pointer;
+}
+
+#availability_editor tr td {
+  text-align: center;
+  margin: 2px;
+}
+
+#availability_editor tr td.checked {
+  background-color: #83bd7c ;
+}
+#availability_editor tr td.unchecked {
+  background-color: #d8d8be;
 }

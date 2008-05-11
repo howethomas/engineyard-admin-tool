@@ -14,9 +14,8 @@ class Employee < ActiveRecord::Base
     end
     
     def random_string(length=10)
-      Array.new(length) do
-        [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).flatten[rand(10 + 26 + 26)]
-      end.to_s
+      character_set = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).flatten
+      Array.new(length) { character_set[rand(character_set.size)] }.to_s
     end
     
     def password_with_salt(password, salt)
@@ -42,10 +41,11 @@ class Employee < ActiveRecord::Base
     
   end
   
-  # SHOULD BE FROM DATABASE!
-  CALL_TIMES = 9..17 # 9am to 5pm
+  DEFAULT_CALL_TIMES = [[false] * 9 + [true] * 9 + [false] * 6] * 7
   
   attr_accessor :password
+  
+  serialize :availability_rules
   
   validates_numericality_of :extension
   validates_presence_of :name, :extension, :encrypted_password, :voicemail_pin
@@ -96,12 +96,11 @@ class Employee < ActiveRecord::Base
     TZInfo::Timezone.get(time_zone).utc_to_local(Time.now)
   end
   
-  def available?(for_group)
-    mobile_number && !on_vacation && (RAILS_ENV == 'production' ? !after_hours?(for_group) : true)
-  end
-  
-  def after_hours?(for_group)
-    not availability_range(for_group).include?(current_time_in_timezone.hour)
+  def available?
+    current_time = current_time_in_timezone
+    mobile_number && !on_vacation && (
+      RAILS_ENV == 'production' ? availability_rules[current_time.wday][current_time.hour] : true
+    )
   end
   
   def reset_password

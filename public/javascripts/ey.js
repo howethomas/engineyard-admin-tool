@@ -11,6 +11,17 @@ function forgotPassword(url) {
     $('username_of_forgotten_password').value = email_address;
     form.submit();
   } else {
-    alert("Please enter your @engineyard.com email in the textbox above and then click this link.");
+    alert("You must enter your email address in the textbox above first.");
   }
+}
+
+function availabilityRuleCellClicked(cell) {
+  checkbox = cell.childNodes[0];
+  checkbox.checked = !checkbox.checked;
+  // availabilityRuleClicked(checkbox);
+  cell.className = checkbox.checked ? 'checked' : 'unchecked';
+}
+
+function availabilityRuleClicked(checkbox) {
+  availabilityRuleCellClicked(checkbox.parentNode);
 }

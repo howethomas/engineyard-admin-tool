@@ -17,4 +17,16 @@ module ApplicationHelper
     "1 (#{npa}) #{nxx}-#{xxxx}"
   end
   
+  def humanize_hour(hour)
+    if hour == 0
+      "12am"
+    elsif hour < 12
+      "#{hour}am"
+    elsif hour == 12
+      "12pm"
+    else
+      "#{hour - 12}pm"
+    end
+  end
+  
 end
