@@ -104,7 +104,7 @@ class EmployeesController < ApplicationController
       params[:employee].each_pair { |key, value| @employee.send("#{key}=", value) }
       unless @employee.save
         flash[:error] = @employee.errors.full_messages
-        @employee.errors.clear
+        flash.discard
       end
     end
     render :layout => false
