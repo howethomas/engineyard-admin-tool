@@ -50,6 +50,7 @@ class EmployeesController < ApplicationController
   # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
+    @employee.availability_rules = availability_rules_from_params
     
     selected_groups = params.keys.grep(/^group_/).map { |group| group[/^group_(\d+)$/, 1] }
     @groups = Group.find(:all).map { |group| [group, selected_groups.include?(group.name)] }
