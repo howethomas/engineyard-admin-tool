@@ -49,6 +49,7 @@ class EmployeesController < ApplicationController
   # POST /employees.xml
   def create
     @employee = Employee.new(params[:employee])
+    
     selected_groups = params.keys.grep(/^group_/).map { |group| group[/^group_(\d+)$/, 1] }
     @groups = Group.find(:all).map { |group| [group, selected_groups.include?(group.name)] }
     
@@ -74,6 +75,7 @@ class EmployeesController < ApplicationController
   # PUT /employees/1.xml
   def update
     @employee = Employee.find(params[:id])
+    @employee.availability_rules = availability_rules_from_params
     
     reassign_employee_memberships
     
@@ -110,6 +112,18 @@ class EmployeesController < ApplicationController
   end
   
   private
+
+  def availability_rules_from_params
+    returning Array.new(7) { [false] * 24 } do |rules|
+      params.each do |(key, value)|
+        match = key.to_s.match /^available_(\d+)_(\d+)$/
+        next unless match
+        x,y = match.captures.map(&:to_i)
+        puts [x,y].inspect
+        rules[x][y] = true
+      end
+    end
+  end
   
   def reassign_employee_memberships
     @employee.save

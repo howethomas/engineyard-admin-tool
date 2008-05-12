@@ -18,4 +18,11 @@
 
 <p><strong><%= @employee.name %>'s current time:</strong> <%= @employee.current_time_in_timezone.strftime('%I:%M %p') %></p>
 
+<h3>Availability</h3>
+
+<div id="availability_editor_container">
+  <%= render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => false} %>
+</div>
+
+
 <%= link_to 'Edit', edit_employee_path(@employee) %> | <%= link_to 'Back', employees_path %>

@@ -255,9 +255,21 @@ div#availability_editor {
   margin: 2px;
 }
 
+#availability_editor tr td:active {
+  background-color: green;
+}
+
 #availability_editor tr td.checked {
   background-color: #83bd7c ;
 }
+#availability_editor tr td.checked:hover {
+  background-color: #a8cda3;
+}
+
 #availability_editor tr td.unchecked {
   background-color: #d8d8be;
+}
+
+#availability_editor tr td.unchecked:hover {
+  background-color: #cacab2;
 }

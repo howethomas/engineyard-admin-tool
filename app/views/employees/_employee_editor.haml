@@ -54,7 +54,7 @@
 
 
 #availability_editor_container{:style => 'display: none'}
-  = render :partial => "availability_editor", :locals => {:employee => @employee}
+  = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}
 
 %p
   = f.submit button_text
