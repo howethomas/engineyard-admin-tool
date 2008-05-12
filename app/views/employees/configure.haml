@@ -20,7 +20,7 @@
         
         %p.flash-notice{:style => "color: green"}= flash[:notice]
         %p.flash-error{ :style => "color: red"  }= flash[:error]
-        
+
         - form_for :employee, @employee, :url => {:action => "configure"} do |f|
 
         #availability
@@ -82,9 +82,28 @@
           = f.submit "Update"
 
         - end
+        
+        - if @employee.must_change_password?
+        #change-password{:style => 'width: 300px'}
+          %h3{:style => "color: red"} Change Password!
 
-      
-      
+
+          - form_tag :controller => "welcome", :action => "change_password" do
+          .field
+            %p
+              %label{:for => "password_one"} New password
+              = password_field_tag "password_one"
+
+            %p
+              %label{:for => "password_two"} Confirm
+              = password_field_tag "password_two"
+
+          %p
+            = submit_tag "Change"
+
+          - end
+        -end
+        %br{:style => 'clear:both'}
       .footer
         %span.powered-by
           Powered by

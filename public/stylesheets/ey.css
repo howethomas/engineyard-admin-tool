@@ -60,6 +60,7 @@ label {
 
 div.footer {
 	text-align: center;
+	clear: both;
 	color: #d0cfbe;
 	font-size: 11px;
 }
@@ -294,6 +295,7 @@ div#availability_editor {
 #configure-container #availability {
   margin: 0;
   float: right;
+  clear: right;
 }
 #configure-container .field label {
   display: block;
@@ -321,7 +323,6 @@ div#availability_editor {
 
 #configure-container div.submit {
   text-align:center;
-  clear: both;
   width: 300px;
 }
 
@@ -331,7 +332,6 @@ div#availability_editor {
 
 #cheatsheet ul {
   list-style: none;
-  width: 300px;
 }
 #cheatsheet ul li {
   padding: 3px;

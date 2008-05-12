@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   
-  before_filter :ensure_logged_in, :ensure_admin, :except => [:login, :forgot_password, :reset_password, :logout]
-  
+  before_filter :ensure_logged_in, :except => [:login, :forgot_password, :reset_password, :logout]
+  before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password]
   def index
   end
   
@@ -71,7 +71,7 @@ class WelcomeController < ApplicationController
         if @logged_in_user.save
           flash[:notice] = "Password successfully changed. Don't forget it!"
         else
-          flash[:error] = "There was an error changing your password!"
+          flash[:error] = "There was an error changing your password! #{@logged_in_user.errors.full_messages.join ', '}"
         end
       else
         flash[:error] = "Passwords do not match or were not supplied!"
