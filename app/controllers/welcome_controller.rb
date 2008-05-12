@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   
-  before_filter :ensure_logged_in, :ensure_admin, :except => [:login, :forgot_password, :reset_password]
+  before_filter :ensure_logged_in, :ensure_admin, :except => [:login, :forgot_password, :reset_password, :logout]
   
   def index
   end
@@ -19,7 +19,11 @@ class WelcomeController < ApplicationController
         valid_employee = Employee.authenticate(email, password)
         if valid_employee
           set_logged_in_employee valid_employee
-          redirect_to :action => "index"
+          if valid_employee.admin?
+            redirect_to :action => "index"
+          else
+            redirect_to :controller => :employees, :action => "configure"
+          end
         else
           flash[:error] = "Incorrect email address or password!"
           redirect_to :action => "login"

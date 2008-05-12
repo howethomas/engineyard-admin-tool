@@ -264,10 +264,6 @@ div#availability_editor {
   margin: 2px;
 }
 
-#availability_editor tr td:active {
-  background-color: green;
-}
-
 #availability_editor tr td.checked {
   background-color: #83bd7c ;
 }
