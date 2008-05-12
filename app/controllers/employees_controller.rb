@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   
-  before_filter :ensure_logged_in, :except => :login
+  before_filter :ensure_logged_in
+  before_filter :ensure_admin, :except => :configure
   
   # GET /employees
   # GET /employees.xml
@@ -92,6 +93,12 @@ class EmployeesController < ApplicationController
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def configure
+    @employee = @logged_in_user
+    @employees = Employee.find(:all, :order => "extension")
+    @full_size_container = true
   end
   
   def call

@@ -1,0 +1,13 @@
+%h2 Employee Extension Cheatsheet
+
+#cheatsheet
+  %ul
+    - for employee in @employees
+    %li{:class => cycle('even', 'odd')}
+      %span.extension=h employee.extension
+      %span.name=h employee.name + (employee.admin? ? '* ' : '')
+    - end
+
+  #bottom
+    %p An * denotes administrator status
+    %p= "Generated at #{Time.now}"

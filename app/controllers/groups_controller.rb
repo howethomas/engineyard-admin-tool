@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   
-  before_filter :ensure_logged_in
+  before_filter :ensure_logged_in, :ensure_admin
   
   def editor
     if request.post?

@@ -273,3 +273,67 @@ div#availability_editor {
 #availability_editor tr td.unchecked:hover {
   background-color: #cacab2;
 }
+
+#configure-container {
+  font-size: 17px;
+	font-family: Tahoma, "Trebuchet MS", Arial;
+	margin: 0 auto;
+	padding: 0 10px 10px 10px;
+	width: 930px;
+	background: #f2f2d5;
+}
+#configure-container h2 {
+  text-align: center;
+}
+
+#configure-container #availability {
+  margin: 0;
+  float: right;
+}
+#configure-container .field label {
+  display: block;
+}
+#configure-container .field p {
+  margin: 0;
+}
+
+#configure-container #availability p {
+  margin-top : 0;
+  text-align: right;
+}
+#configure-container #availability h3 {
+  margin-top: 0;
+}
+#configure-container div.field {
+  background-color: #d8d8be;
+  width: 300px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+#configure-container div.field input {
+  width: 295px;
+}
+
+#configure-container div.submit {
+  text-align:center;
+  clear: both;
+  width: 300px;
+}
+
+#cheatsheet {
+  
+}
+
+#cheatsheet ul {
+  list-style: none;
+  width: 300px;
+}
+#cheatsheet ul li {
+  padding: 3px;
+}
+#cheatsheet ul span.extension {
+   width: 50px;
+}
+#cheatsheet ul li.even {
+  background-color: #d8d8be;
+}

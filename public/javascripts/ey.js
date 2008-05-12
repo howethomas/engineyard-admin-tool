@@ -24,3 +24,10 @@ function availabilityRuleCellClicked(cell) {
 function availabilityRuleClicked(checkbox) {
   availabilityRuleCellClicked(checkbox.parentNode);
 }
+
+function toggleCheatSheet(link) {
+  Effect.toggle('cheatsheet','blind', {duration: 0.3});
+  Effect.toggle('fields','blind', {duration: 0.3});
+  default_link_text = "View all employees' extensions"
+  link.innerHTML = link.innerHTML == default_link_text ? "Hide employees' extensions" : default_link_text
+}

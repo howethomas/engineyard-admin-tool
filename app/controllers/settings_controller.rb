@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   
-  before_filter :ensure_logged_in
+  before_filter :ensure_logged_in, :ensure_admin
   
   GLOBAL_SETTING     = /^global_(\d+)$/
   INDIVIDUAL_SETTING = /^group_(\d+)_(\d+)$/

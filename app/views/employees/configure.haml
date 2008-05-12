@@ -1,0 +1,66 @@
+#configure-container
+
+  %h2 Configure your account
+  
+  - form_for @employee do |f|
+  
+  #availability
+    %p
+      %span.on-vacation
+        = f.check_box :on_vacation
+        %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
+
+    = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
+
+
+  #fields
+    .field.name
+      %label{:for => "employee_name"} Name
+      = f.text_field :name
+
+    .field.email
+      %label{:for => "employee_email"} Email
+      %p This is your username to this system.
+      = f.text_field :email
+    .field.phone-number
+      %label{:for => "employee_mobile_number"} Phone number
+      = f.text_field :mobile_number
+  
+    .field.pin
+      %label{:for => "employee_voicemail_pin"} Voicemail PIN
+      = f.text_field :voicemail_pin
+
+    .field.time-zone
+      %label{:for => "employee_time_zone"} Time zone
+      = select_timezone
+
+    .field.extension
+      %strong Extension: 
+      = h @employee.extension
+
+    .field.groups
+      - if @employee.groups.any?
+      %strong Your Groups:
+      %ul
+        - for group in @employee.groups
+        %li= h group.name
+        - end
+      - else
+      %strong You don't belong to any groups
+      -end
+
+  #other-employees
+    %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
+    #cheatsheet{:style => 'display: none'}
+      %ul
+        - for employee in @employees
+        %li{:class => cycle('even', 'odd')}
+          %strong=h employee.extension
+          =h employee.name + (employee.admin? ? '* ' : '')
+        - end
+
+  .submit
+    = f.submit "Update"
+
+  - end
+
