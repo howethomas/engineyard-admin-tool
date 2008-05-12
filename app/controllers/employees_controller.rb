@@ -130,7 +130,7 @@ class EmployeesController < ApplicationController
   private
 
   def availability_rules_from_params
-    returning Array.new(7) { [false] * 24 } do |rules|
+    returning Employee.blank_availability_rules do |rules|
       params.each do |(key, value)|
         match = key.to_s.match /^available_(\d+)_(\d+)$/
         next unless match

@@ -10,7 +10,7 @@
   %tr
     %td=h employee.extension
     %td= link_to h(employee.name), employee_path(employee), :class => employee.on_vacation ? "on-vacation-list" : ""
-    %td= employee.mobile_number? ? employee.mobile_number : alert!
+    %td= employee.mobile_number? ? format_phone_number(employee.mobile_number) : alert!
     %td= "admin" if employee.admin?
     %td= link_to 'Delete', employee, :confirm => "Are you sure you wish to delete employee #{h(employee.name)} permanently?", :method => :delete
   - end

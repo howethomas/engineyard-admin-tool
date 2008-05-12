@@ -39,6 +39,16 @@ class Employee < ActiveRecord::Base
       end
     end
     
+    def blank_availability_rules
+      Array.new(7) { [false] * 24 }
+    end
+    
+    def nine_to_five_availability_rules
+      blank_availability_rules.map do |day|
+        day.fill(true, 9..17)
+      end
+    end
+    
   end
   
   DEFAULT_CALL_TIMES = [[false] * 9 + [true] * 9 + [false] * 6] * 7
@@ -68,6 +78,11 @@ class Employee < ActiveRecord::Base
   
   has_many :memberships
   has_many :groups, :through => :memberships
+  
+  def initialize(*args, &block)
+    super(*args, &block)
+    initialize_availability_rules
+  end
   
   def authenticated?(password)
     if self.salt
@@ -133,6 +148,10 @@ class Employee < ActiveRecord::Base
   def generate_temporary_password
     raise "Salt already set!" if self.salt
     self.encrypted_password = self.class.new_random_temp_password
+  end
+
+  def initialize_availability_rules
+    self.availability_rules ||= Employee.nine_to_five_availability_rules
   end
   
 end
