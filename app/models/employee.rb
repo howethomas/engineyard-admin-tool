@@ -47,7 +47,7 @@ class Employee < ActiveRecord::Base
   
   serialize :availability_rules
   
-  validates_numericality_of :extension
+  validates_numericality_of :extension, :voicemail_pin, :mobile_number
   validates_presence_of :name, :extension, :encrypted_password, :voicemail_pin
   validates_length_of :encrypted_password, :within => 4..40
   

@@ -14,8 +14,8 @@
 
     #container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
     
-      %p{:style => "color: green"}= flash[:notice]
-      %p{:style => "color: red"}= flash[:error]
+      %p.flash-notice{:style => "color: green"}= flash[:notice]
+      %p.flash-error{ :style => "color: red"  }= flash[:error]
       = yield
       
       .footer

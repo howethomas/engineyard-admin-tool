@@ -5,6 +5,9 @@
   <% end %>
 </h2>
 
+<% if @employee.admin? %>
+<p>This person is an administrator of this phone system.</p>
+<% end %>
 
 <p><strong>Extension:</strong> <%=h @employee.extension %></p>
 

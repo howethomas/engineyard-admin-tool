@@ -30,6 +30,10 @@ h1 a:hover {
 	width: 580px;
 	background: #f2f2d5;
 }
+#container.full p.flash-error {
+  text-align: center;
+}
+
 a {
 	color: black;
 	font-weight: bold;
@@ -73,6 +77,11 @@ a.on-vacation-list {
 }
 
 .on-vacation label {
+	font-weight: normal;
+	padding: 3px;
+}
+
+.admin label {
 	font-weight: normal;
 	padding: 3px;
 }

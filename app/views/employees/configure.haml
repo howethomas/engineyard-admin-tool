@@ -1,66 +1,94 @@
-#configure-container
-
-  %h2 Configure your account
+!!! XML
+!!! Strict
+%html
+  %head
+    %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
+    %title= "Engine Yard Phone System: #{controller.action_name}"
+    = stylesheet_link_tag "ey"
+    = javascript_include_tag :defaults
+    = javascript_include_tag "ey"
+    
+  %body
   
-  - form_for @employee do |f|
-  
-  #availability
-    %p
-      %span.on-vacation
-        = f.check_box :on_vacation
-        %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
+    %h1 Phone System
 
-    = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
+    #container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
+    
+      #configure-container
+
+        %h2 Configure your account
+        
+        %p.flash-notice{:style => "color: green"}= flash[:notice]
+        %p.flash-error{ :style => "color: red"  }= flash[:error]
+        
+        - form_for :employee, @employee, :url => {:action => "configure"} do |f|
+
+        #availability
+          %p
+            %span.on-vacation
+              = f.check_box :on_vacation
+              %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
+
+          = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
 
 
-  #fields
-    .field.name
-      %label{:for => "employee_name"} Name
-      = f.text_field :name
+        #fields
+          .field.name
+            %label{:for => "employee_name"} Name
+            = f.text_field :name
 
-    .field.email
-      %label{:for => "employee_email"} Email
-      %p This is your username to this system.
-      = f.text_field :email
-    .field.phone-number
-      %label{:for => "employee_mobile_number"} Phone number
-      = f.text_field :mobile_number
-  
-    .field.pin
-      %label{:for => "employee_voicemail_pin"} Voicemail PIN
-      = f.text_field :voicemail_pin
+          .field.email
+            %label{:for => "employee_email"} Email
+            %p This is your username to this system.
+            = f.text_field :email
+          .field.phone-number
+            %label{:for => "employee_mobile_number"} Phone number
+            = f.text_field :mobile_number
 
-    .field.time-zone
-      %label{:for => "employee_time_zone"} Time zone
-      = select_timezone
+          .field.pin
+            %label{:for => "employee_voicemail_pin"} Voicemail PIN
+            = f.text_field :voicemail_pin
 
-    .field.extension
-      %strong Extension: 
-      = h @employee.extension
+          .field.time-zone
+            %label{:for => "employee_time_zone"} Time zone
+            = select_timezone
 
-    .field.groups
-      - if @employee.groups.any?
-      %strong Your Groups:
-      %ul
-        - for group in @employee.groups
-        %li= h group.name
+          .field.extension
+            %strong Extension: 
+            = h @employee.extension
+
+          .field.groups
+            - if @employee.groups.any?
+            %strong Your Groups:
+            %ul
+              - for group in @employee.groups
+              %li= h group.name
+              - end
+            - else
+            %strong You don't belong to any groups
+            -end
+
+        #other-employees
+          %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
+          #cheatsheet{:style => 'display: none'}
+            %ul
+              - for employee in @employees
+              %li{:class => cycle('even', 'odd')}
+                %strong=h employee.extension
+                =h employee.name
+              - end
+
+        .submit
+          = f.submit "Update"
+
         - end
-      - else
-      %strong You don't belong to any groups
-      -end
 
-  #other-employees
-    %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
-    #cheatsheet{:style => 'display: none'}
-      %ul
-        - for employee in @employees
-        %li{:class => cycle('even', 'odd')}
-          %strong=h employee.extension
-          =h employee.name + (employee.admin? ? '* ' : '')
-        - end
-
-  .submit
-    = f.submit "Update"
-
-  - end
+      
+      
+      .footer
+        %span.powered-by
+          Powered by
+          %a{:href => "http://adhearsion.com"} Adhearsion
+          |
+        %span.logout= logout
 

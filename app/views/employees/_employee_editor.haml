@@ -1,5 +1,12 @@
 - form_for employee do |f|
 
+- unless employee == @logged_in_user
+%p
+  %span.admin
+    = f.check_box :admin
+    %label{:for => 'employee_admin'} This person can administer this phone system.
+-end
+
 %p
   %span.on-vacation
     = f.check_box :on_vacation

@@ -99,6 +99,15 @@ class EmployeesController < ApplicationController
     @employee = @logged_in_user
     @employees = Employee.find(:all, :order => "extension")
     @full_size_container = true
+    if request.post?
+      @employee.availability_rules = availability_rules_from_params
+      params[:employee].each_pair { |key, value| @employee.send("#{key}=", value) }
+      unless @employee.save
+        flash[:error] = @employee.errors.full_messages
+        @employee.errors.clear
+      end
+    end
+    render :layout => false
   end
   
   def call
