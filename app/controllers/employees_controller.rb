@@ -119,7 +119,6 @@ class EmployeesController < ApplicationController
         match = key.to_s.match /^available_(\d+)_(\d+)$/
         next unless match
         x,y = match.captures.map(&:to_i)
-        puts [x,y].inspect
         rules[x][y] = true
       end
     end

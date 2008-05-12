@@ -16,9 +16,8 @@ function forgotPassword(url) {
 }
 
 function availabilityRuleCellClicked(cell) {
-  checkbox = cell.childNodes[0];
+  checkbox = cell.childNodes[1];
   checkbox.checked = !checkbox.checked;
-  // availabilityRuleClicked(checkbox);
   cell.className = checkbox.checked ? 'checked' : 'unchecked';
 }
 

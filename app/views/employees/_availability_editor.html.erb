@@ -15,7 +15,7 @@
     <% hours_of_day.each_with_index do |day_of_week,day| %>
     <td <%= %{onClick="javascript:availabilityRuleCellClicked(this)"} if interactive %> class="<%= day_of_week ? 'checked' : 'unchecked'%>">
     <% if interactive %>
-    <%= check_box_tag "available_#{day}_#{hour}", 'true', day_of_week, "onClick" => interactive ? 'javascript:availabilityRuleClicked(this)' : '' %>
+    <%= check_box_tag "available_#{day}_#{hour}", 'true', day_of_week, interactive ? {"onClick" => 'javascript:availabilityRuleClicked(this)'} : {} %>
     <% end %>
     </td>
     <% end %>
