@@ -36,4 +36,10 @@ class CallsController < ApplicationController
         format.xml  { head :ok }
       end
     end
+    
+    def call
+      Action.introduce params[:source], params[:destination]
+      render :nothing => true
+    end
+    
 end
