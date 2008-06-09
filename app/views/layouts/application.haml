@@ -12,6 +12,7 @@
   %body
   
     %h1= link_to "Phone System", root_url
+    
 
     #container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
     
@@ -22,6 +23,9 @@
       .footer
         %span.powered-by
           Powered by
-          %a{:href => "http://adhearsion.com"} Adhearsion!
+          %a{:href => "http://adhearsion.com"} Adhearsion
+          | 
+          %span.logout= logout
           |
-        %span.logout= logout
+          %a{:href => root_url} Home 
+          
