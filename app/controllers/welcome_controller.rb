@@ -94,6 +94,11 @@ class WelcomeController < ApplicationController
     redirect_to :back
   end
   
+  def make_call
+    Action.introduce params[@logged_in_user.mobile_number], params[:number]
+    redirect_to :back
+  end
+    
   private
   
   def set_logged_in_employee(employee)

@@ -1,0 +1,7 @@
+<a href="#" onclick="new Effect.Appear('call-form');"> Make a Call</a>
+	<div id="call-form" style="display:none;">		
+		<% form_tag({:action => :make_call}) do -%>
+	  		<%= text_field_tag :number, params[:number] %>
+			<%= submit_tag 'Call'-%> 
+		<% end -%>
+	</div>
