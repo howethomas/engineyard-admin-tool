@@ -51,7 +51,7 @@ class VoicemailsController < ApplicationController
     def get_voicemails(extension, status=:all)
       case status
       when :all
-        file_path = VOICEMAIL_ROOT 
+        file_path = VOICEMAIL_ROOT+"#{extension}/INBOX"
         files = []
         Dir.entries(file_path).each {|f| files << file_path + f if f.include? ".txt"}
         voice_mails = []

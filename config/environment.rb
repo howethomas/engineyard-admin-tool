@@ -62,5 +62,5 @@ Rails::Initializer.run do |config|
   require 'tzinfo' # Use tzinfo library to convert to and from the users timezone
   ENV['TZ'] = 'UTC' # This makes Time.now return time in UTC
 
-  VOICEMAIL_ROOT="/Users/thomashowe/src/engineyard/voicemail/employees/251/INBOX/"
+  VOICEMAIL_ROOT="/var/spool/asterisk/voicemail/employees/"
 end
