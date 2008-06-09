@@ -1,27 +1,35 @@
 <table id="availability_editor">
   <tr>
     <th></th>
-    <th>Sunday <br><span style="font-size: 12px"> <%= link_to_function "On", on_day("0") %>|<%= link_to_function "Off", off_day("0") %> </span> </th>    
-    <th>Monday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("1") %>|<%= link_to_function "Off", off_day("1") %></span></th>    
-    <th>Tuesday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("2") %>|<%= link_to_function "Off", off_day("2") %></span></th>    
-    <th>Wednesday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("3") %>|<%= link_to_function "Off", off_day("3") %></span></th>    
-    <th>Thursday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("4") %>|<%= link_to_function "Off", off_day("4") %></span></th>    
-    <th>Friday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("5") %>|<%= link_to_function "Off", off_day("5") %></span></th>    
-    <th>Saturday <br><span style="font-size: 12px"><%= link_to_function "On", on_day("6") %>|<%= link_to_function "Off", off_day("6") %></span></th>    
+	<% 	
+		days = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday] 
+		index = 0
+	days.each {
+	%>
+	<th> <%=days[index] %>
+		 <% if interactive %>
+			<br><span style="font-size: 12px"> 
+			<%= link_to_function "On", on_day("0") %>|<%= link_to_function "Off", off_day("0") %> 			
+			</span>    
+		 <% end %>
+	</th>
+	<% index += 1  } %>		
  </tr>
   <% employee.availability_rules.transpose.each_with_index do |hours_of_day,hour| %>
   <tr>
     <td> <%= humanize_hour(hour)-%>
 	<span style="font-size: 12px">
-	<%= link_to_function "On", on_hour(hour.to_s) -%>
-	<%= link_to_function "Off", off_hour(hour.to_s) -%> 
+	<%= link_to_function "On", on_hour(hour.to_s) if interactive -%>
+	<%= link_to_function "Off", off_hour(hour.to_s) if interactive -%> 
 	</span>
 	</td>
     <% hours_of_day.each_with_index do |day_of_week,day| %>
     <td <%= %{onfocus="javascript:availabilityRuleCellClicked(this)"} if interactive %> class="<%= day_of_week ? 'checked' : 'unchecked'%>">
     <% if interactive %>
     <%= check_box_tag "available_#{day}_#{hour}", 'true', day_of_week, interactive ? {"onfocus" => 'javascript:availabilityRuleClicked(this)'} : {} %>
-    <% end %>
+    <% else %>
+		<input name="<%="available_#{day}_#{hour}"%>" DISABLED TYPE=CHECKBOX <%="CHECKED" if day_of_week %> READONLY>
+	<% end %>
     </td>
     <% end %>
   </tr>
