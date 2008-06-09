@@ -1,21 +1,21 @@
 %h2 Phone Calls
 
-%p
+%p.links
   = link_to 'View My Call Stats', :action => "call_stats"
   = link_to 'View Company Call Stats', :action => "company_call_stats"
 
-%table
-  %tr
-    %th Date
-    %th Duration
-    %th Disposition
-    %th Caller ID
+  %table
+    %tr
+      %th.cdr_text Date
+      %th.cdr_text Duration
+      %th.cdr_text Disposition
+      %th.cdr_text Caller ID
   
-  - for call in @calls
-  %tr
-    %td= call.calldate
-    %td= call.duration
-    %td= call.disposition
-    %td= call.clid
-  - end
-%br
+    - for call in @calls
+    %tr
+      %td.cdr_text= call.calldate
+      %td.cdr_text= call.duration
+      %td.cdr_text= call.disposition
+      %td.cdr_text= call.clid
+    - end
+  %br

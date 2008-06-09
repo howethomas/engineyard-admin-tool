@@ -45,8 +45,26 @@ small_text {
 	font-size: 10px;
 	padding: 1px;
 }
+td.cdr_text {
+	color: black;
+	font-size: 12px;
+	padding: 1px;
+	text-align: center;
+}
 
+th.cdr_text {
+	color: black;
+	font-size: 16px;
+	padding: 1px;
+	text-align: center;
+}
 
+p.links {
+	color: black;
+	font-size: 12px;
+	padding: 1px;
+	text-align: left;
+}
 
 a:hover {
 	color: #f2f2d5;
