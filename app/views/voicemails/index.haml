@@ -1,0 +1,22 @@
+%h2 VoiceMails
+
+%p
+
+%table
+  %tr
+    %th Date
+    %th Duration
+    %th Caller ID
+    %th
+    %th
+    %th
+  
+  - for vm in @voicemails
+  %tr
+    %td= vm.orig_date
+    %td= vm.duration
+    %td= click_to_dial(vm.caller_id)
+    %td= link_to "Play", :controller => "voicemails", :action => "play", :sound_file => vm.sound_file
+    %td= link_to "Delete", :controller => "voicemails", :action => "delete", :filename => vm.filename, :sound_file => vm.sound_file
+  - end
+%br

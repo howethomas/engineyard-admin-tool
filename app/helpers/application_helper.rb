@@ -29,4 +29,36 @@ module ApplicationHelper
     end
   end
   
+  def on_day(day) 
+    update_page do |page|
+      for hour in 0..23 
+        page["available_#{day}_#{hour}"].checked = true
+      end
+    end 
+  end 
+
+  def on_hour(hour) 
+    update_page do |page|
+      for day in 0..6
+        page["available_#{day}_#{hour}"].checked = true
+      end
+    end 
+  end 
+
+  def off_day(day) 
+    update_page do |page|
+      for hour in 0..23 
+        page["available_#{day}_#{hour}"].checked = false
+      end
+    end 
+  end 
+  
+  def off_hour(hour) 
+    update_page do |page|
+      for day in 0..6
+        page["available_#{day}_#{hour}"].checked = false
+      end
+    end 
+  end 
+  
 end

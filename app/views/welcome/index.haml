@@ -5,6 +5,7 @@
   %li= link_to "Manage groups of employees", :controller => "groups"
   %li= link_to "Edit the main voice menu tree", extension_manager_path
   %li= link_to "Edit global settings", :controller => "settings", :action => "editor"
-  /%li= link_to "View a history of calls"
+  %li= link_to "View a history of calls", :controller => "calls", :action => "index"
+  %li= link_to "View my voicemails", :controller => "voicemails", :action => "index"
 
 = render :partial => "change_password" if @logged_in_user.must_change_password?

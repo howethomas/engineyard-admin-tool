@@ -5,7 +5,7 @@ set :application, "pbx-gui"
 
 # Git/Github setup
 set :scm, :git
-set :repository,  "git@github.com:jicksta/engineyard-admin-tool.git"
+set :repository,  "git@github.com:howethomas/engineyard-admin-tool.git"
 
 set :project_deploy_to_root, "/usr/local/engineyard"
 

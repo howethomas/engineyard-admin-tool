@@ -40,6 +40,14 @@ a {
 	padding: 1px;
 }
 
+small_text {
+	color: black;
+	font-size: 10px;
+	padding: 1px;
+}
+
+
+
 a:hover {
 	color: #f2f2d5;
 	background-color: black;

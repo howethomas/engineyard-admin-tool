@@ -11,7 +11,8 @@
 
 <p><strong>Extension:</strong> <%=h @employee.extension %></p>
 
-<p><strong>Email:</strong> <%=h @employee.email %></p>
+<p><strong>Email:</strong> <%=h @employee.email %> </p>
+<p><%= link_to "Reset Password Now", :controller => :welcome, :action => :request_password_reset, :id => @employee.id %> </p>
 
 <p><strong>Voicemail PIN:</strong> <%=h @employee.voicemail_pin %></p>
 

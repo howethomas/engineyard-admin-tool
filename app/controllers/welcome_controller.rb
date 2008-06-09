@@ -51,6 +51,20 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def request_password_reset
+    employee = Employee.find(params[:id])
+    if employee
+        token = employee.create_password_reset_token
+        PasswordMailer.deliver_password_reassignment(employee, token)
+        flash[:notice] = "The password reset request has been sent"
+        redirect_to :back 
+      else
+        flash[:error] = "I'm not sure how this happened! Where did my empoyee go?"
+        redirect_to :back 
+      end
+      
+  end
+  
   def reset_password
     token = params[:token]
     if employee = Employee.find_by_password_reset_token(token)

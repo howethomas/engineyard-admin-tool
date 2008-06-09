@@ -14,7 +14,7 @@ module EmployeesHelper
       :url => {
         :controller => "employees", :action => "call",
         :source => @logged_in_user.mobile_number,
-        :destination => @employee.mobile_number
+        :destination => mobile_number
       },
       :complete => "callRequestSent();",
       :html => {:id => "click_to_call_link"}
