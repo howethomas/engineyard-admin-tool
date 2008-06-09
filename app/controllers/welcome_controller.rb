@@ -96,7 +96,7 @@ class WelcomeController < ApplicationController
   
   def make_call
     flash[:notice] = "Making a call from #{@logged_in_user.mobile_number} to #{params[:number]}"
-    Action.introduce params[@logged_in_user.mobile_number], params[:number]
+    Action.introduce @logged_in_user.mobile_number, params[:number]
     redirect_to :back
   end
     
