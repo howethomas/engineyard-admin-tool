@@ -9,7 +9,7 @@
 	<th> <%=days[index] %>
 		 <% if interactive %>
 			<br><span style="font-size: 12px"> 
-			<%= link_to_function "On", on_day(index.to_s) %>|<%= link_to_function "Off", off_day("0") %> 			
+			<%= link_to_function "On", on_day(index.to_s) %>|<%= link_to_function "Off", off_day(index.to_s) %> 			
 			</span>    
 		 <% end %>
 	</th>
