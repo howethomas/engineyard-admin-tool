@@ -12,14 +12,21 @@
   %body
   
     %h1= link_to "Phone System", root_url
+
+    
+  
+    
+    
     
 
     #container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
     
       %p.flash-notice{:style => "color: green"}= flash[:notice]
       %p.flash-error{ :style => "color: red"  }= flash[:error]
-      = yield
       
+      = yield
+      %br/
+      %small_text= mail_to("ticket+thomashowe.11783-dw9gfkx2@lighthouseapp.com", "Found a bug?", :cc => "howethomas@aol.com")
       .footer
         %span.powered-by
           Powered by
