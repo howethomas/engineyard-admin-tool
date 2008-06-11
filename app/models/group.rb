@@ -24,6 +24,7 @@ class Group < ActiveRecord::Base
   def initialize(*args, &block)
     super
     ensure_caller_id_presence
+    settings              # Make sure we have the default settings.... set.
   end
   
   def settings
