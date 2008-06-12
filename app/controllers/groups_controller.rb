@@ -26,13 +26,13 @@ class GroupsController < ApplicationController
   
   def extension_manager
     @groups    = Group.find :all# , :order => ''
-    @employees = Employee.find(:all, :order => "extension")
+    @employees = Employee.find(:all, :order => "name")
     
   end
   
   def show
     @group = Group.find(params[:id])
-    @employees = @group.employees.find(:all, :order => "extension")
+    @employees = @group.employees.find(:all, :order => "name")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @group }

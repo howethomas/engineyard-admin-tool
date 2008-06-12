@@ -83,8 +83,7 @@ class Group < ActiveRecord::Base
         setting = Setting.find_by_name name
         super unless setting
         query = @group_instance.group_setting_overrides.find_by_setting_id(setting.id)
-        value = query.value
-        (value && !value.blank?) ? value : setting.global_setting_override.value
+        query.value.blank? ? setting.global_setting_override.value : query.value        
       end
     end
   end
