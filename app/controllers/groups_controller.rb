@@ -26,13 +26,13 @@ class GroupsController < ApplicationController
   
   def extension_manager
     @groups    = Group.find :all# , :order => ''
-    @employees = Employee.find(:all, :order => "name")
+    @employees = Employee.find(:all).sort_by { |e| e.name[/\s*\S+$/].downcase }
     
   end
   
   def show
     @group = Group.find(params[:id])
-    @employees = @group.employees.find(:all, :order => "name")
+    @employees = @group.employees.find(:all).sort_by { |e| e.name[/\s*\S+$/].downcase }
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @group }

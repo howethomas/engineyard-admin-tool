@@ -6,7 +6,7 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.xml
   def index
-    @employees = Employee.find(:all, :order => :name)
+    @employees = Employee.find(:all).sort_by { |e| e.name[/\s*\S+$/].downcase }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -98,7 +98,7 @@ class EmployeesController < ApplicationController
   
   def configure
     @employee = @logged_in_user
-    @employees = Employee.find(:all, :order => "name")
+    @employees = Employee.find(:all).sort_by { |e| e.name[/\s*\S+$/].downcase }
     @full_size_container = true
     if request.post?
       @employee.availability_rules = availability_rules_from_params
