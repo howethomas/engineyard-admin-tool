@@ -46,12 +46,18 @@ class Group < ActiveRecord::Base
     employees_to_call.each do |employee|
       puts "Creating call for agent #{employee}"
       
-      mobile = employee.mobile_number
-      
+      if employee.mobile_number
+        mobile = employee.mobile_number
+        server.call_agent \
+          :phone_number => mobile,
+          :employee_id  => employee.id,
+          :group_id     => self.id
+      end
       server.call_agent \
-        :phone_number => mobile,
-        :employee_id  => employee.id,
-        :group_id     => self.id
+          :phone_number => employee.extension,
+          :employee_id  => employee.id,
+          :group_id     => self.id
+          
     end
   end
   
