@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   
   before_filter :ensure_logged_in, :except => [:login, :forgot_password, :reset_password, :logout]
-  before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password]
+  before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password, :index]
   def index
   end
   
@@ -71,7 +71,7 @@ class WelcomeController < ApplicationController
       set_logged_in_employee employee
       employee.reset_password
       employee.save
-      redirect_to :action => "index"
+      redirect_to :action => "configure"
     else
       render :text => "Invalid reset token!", :status => 404
     end
@@ -104,6 +104,7 @@ class WelcomeController < ApplicationController
   
   def set_logged_in_employee(employee)
     session[:logged_in_employee_id] = employee.id
+    initialize_logged_in_user
   end
   
 end

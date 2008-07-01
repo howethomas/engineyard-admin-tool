@@ -29,7 +29,7 @@
               = f.check_box :on_vacation
               %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
 
-          = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
+              = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
 
 
         #fields
@@ -77,7 +77,6 @@
                 %strong=h employee.extension
                 =h employee.name
               - end
-
         .submit
           = f.submit "Update"
 

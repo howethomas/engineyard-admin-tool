@@ -54,6 +54,7 @@ class EmployeesController < ApplicationController
     
     selected_groups = params.keys.grep(/^group_/).map { |group| group[/^group_(\d+)$/, 1] }
     @groups = Group.find(:all).map { |group| [group, selected_groups.include?(group.name)] }
+    @employee.mobile_number.gsub!(/\D/,'')    # Removes everything but numbers
     
     respond_to do |format|
       if @employee.valid?
