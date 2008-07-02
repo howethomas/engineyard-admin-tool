@@ -1,6 +1,8 @@
 PRODUCTION_SERVERS = %w[65.74.175.133 65.74.175.134]
 VM_AHN_SERVERS = '10.0.1.194'
 
+TESTING_SERVER =%w[65.74.175.134]
+
 set :application, "pbx-gui"
 
 # Git/Github setup
@@ -42,6 +44,13 @@ task :production do
   set :use_sudo, false
   role :app, *PRODUCTION_SERVERS
   role :web, *PRODUCTION_SERVERS
+end
+
+task :testing do
+  set :user, "root" # Must change to 'deploy'!
+  set :use_sudo, false
+  role :app, *TESTING_SERVER
+  role :web, *TESTING_SERVER
 end
 
 task :vm do
