@@ -1,7 +1,6 @@
 class CallsController < ApplicationController
     before_filter :ensure_logged_in
-    before_filter :ensure_admin, :except => :configure
-
+    
     # GET /employees
     # GET /employees.xml
     def index

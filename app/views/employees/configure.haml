@@ -16,7 +16,7 @@
     
       #configure-container
 
-        %h2 Configure your account
+        %h2 Configure Your Account
         
         %p.flash-notice{:style => "color: green"}= flash[:notice]
         %p.flash-error{ :style => "color: red"  }= flash[:error]
@@ -56,7 +56,7 @@
           .field.extension
             %strong Extension: 
             = h @employee.extension
-
+          
           .field.groups
             - if @employee.groups.any?
             %strong Your Groups:
@@ -67,6 +67,8 @@
             - else
             %strong You don't belong to any groups
             -end
+
+        
 
         #other-employees.field
           %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
@@ -102,6 +104,7 @@
 
           - end
         -end
+        
         %br{:style => 'clear:both'}
       .footer
         %span.powered-by

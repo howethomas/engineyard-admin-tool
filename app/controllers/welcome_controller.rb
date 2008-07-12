@@ -20,9 +20,9 @@ class WelcomeController < ApplicationController
         if valid_employee
           set_logged_in_employee valid_employee
           if valid_employee.admin?
-            redirect_to :action => "index"
+            redirect_to :action => "admin_index"
           else
-            redirect_to :controller => :employees, :action => "configure"
+            redirect_to :action => "index"
           end
         else
           flash[:error] = "Incorrect email address or password!"
