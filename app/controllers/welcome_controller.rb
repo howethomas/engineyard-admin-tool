@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   
   before_filter :ensure_logged_in, :except => [:login, :forgot_password, :reset_password, :logout]
-  before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password, :index]
+  before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password, :index, :make_call]
   def index
   end
   
