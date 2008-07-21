@@ -31,3 +31,10 @@ function toggleCheatSheet(link) {
   default_link_text = "View all employees' extensions"
   link.innerHTML = link.innerHTML == default_link_text ? "Hide employees' extensions" : default_link_text
 }
+
+function toggleCallLog(link) {
+  Effect.toggle('call_log','blind', {duration: 0.3});
+  Effect.toggle('fields','blind', {duration: 0.3});
+  default_link_text = "View my calls"
+  link.innerHTML = link.innerHTML == default_link_text ? "Hide My Calls" : default_link_text
+}

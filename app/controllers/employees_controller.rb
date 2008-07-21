@@ -108,7 +108,6 @@ class EmployeesController < ApplicationController
         flash.discard
       end
     end
-    render :layout => false
   end
   
   def call

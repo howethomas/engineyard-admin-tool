@@ -26,13 +26,14 @@
       
       = yield
       %br/
-      %small_text= mail_to("ticket+thomashowe.11783-dw9gfkx2@lighthouseapp.com", "Found a bug?", :cc => "howethomas@aol.com")
-      .footer
-        %span.powered-by
-          Powered by
-          %a{:href => "http://adhearsion.com"} Adhearsion
-          | 
-          %span.logout= logout
-          |
-          %a{:href => root_url} Home 
+      
+  .footer
+    %small_text= mail_to("ticket+thomashowe.11783-dw9gfkx2@lighthouseapp.com", "Found a bug?", :cc => "howethomas@aol.com")
+    %span.powered-by
+      Powered by
+      %a{:href => "http://adhearsion.com"} Adhearsion
+      | 
+      %span.logout= logout
+      |
+      %a{:href => root_url} Home 
           

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 40) do
+ActiveRecord::Schema.define(:version => 41) do
 
   create_table "actions", :force => true do |t|
     t.integer  "server_id"
@@ -19,6 +19,29 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "name"
     t.text     "message"
   end
+
+  create_table "cdr", :force => true do |t|
+    t.datetime "calldate",                                  :null => false
+    t.string   "clid",        :limit => 80, :default => "", :null => false
+    t.string   "src",         :limit => 80, :default => "", :null => false
+    t.string   "dst",         :limit => 80, :default => "", :null => false
+    t.string   "dcontext",    :limit => 80, :default => "", :null => false
+    t.string   "channel",     :limit => 80, :default => "", :null => false
+    t.string   "dstchannel",  :limit => 80, :default => "", :null => false
+    t.string   "lastapp",     :limit => 80, :default => "", :null => false
+    t.string   "lastdata",    :limit => 80, :default => "", :null => false
+    t.integer  "duration",                  :default => 0,  :null => false
+    t.integer  "billsec",                   :default => 0,  :null => false
+    t.string   "disposition", :limit => 45, :default => "", :null => false
+    t.integer  "amaflags",                  :default => 0,  :null => false
+    t.string   "accountcode", :limit => 20, :default => "", :null => false
+    t.string   "userfield",                 :default => "", :null => false
+    t.string   "uniqueid",    :limit => 32, :default => "", :null => false
+  end
+
+  add_index "cdr", ["calldate"], :name => "calldate"
+  add_index "cdr", ["dst"], :name => "dst"
+  add_index "cdr", ["accountcode"], :name => "accountcode"
 
   create_table "employees", :force => true do |t|
     t.string   "name"
@@ -31,10 +54,10 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.boolean  "admin"
     t.integer  "voicemail_pin"
     t.string   "password_reset_token"
     t.text     "availability_rules"
+    t.boolean  "admin"
   end
 
   create_table "groups", :force => true do |t|

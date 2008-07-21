@@ -52,9 +52,13 @@ class VoicemailsController < ApplicationController
       when :all
         file_path = VOICEMAIL_ROOT+"#{extension}/INBOX/"
         files = []
-        Dir.entries(file_path).each {|f| files << file_path + f if f.include? ".txt"}
         voice_mails = []
-        files.each { |f| voice_mails << Voicemail.new(f) }
+        begin
+          Dir.entries(file_path).each {|f| files << file_path + f if f.include? ".txt"}
+          files.each { |f| voice_mails << Voicemail.new(f) }
+        rescue Exception => e
+          
+        end
         voice_mails
       end      
     end

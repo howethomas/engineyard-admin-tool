@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/ey.css?1214331362 */
+
 body {
 	margin: 0;
 	padding: 0;
@@ -311,7 +313,7 @@ div#availability_editor {
 	font-family: Tahoma, "Trebuchet MS", Arial;
 	margin: 0 auto;
 	padding: 0 10px 10px 10px;
-	width: 1000px;
+	width: 890px;
 	background: #f2f2d5;
 }
 #configure-container h2 {

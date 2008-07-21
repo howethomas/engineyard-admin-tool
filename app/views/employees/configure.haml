@@ -1,103 +1,95 @@
-%h2 Configure
+#configure-container
 
-#container{:style => @full_size_container ? "width: 96%; background-color: white" : ''}
+  %h2 Configure Your Account
+  
+  %p.flash-notice{:style => "color: green"}= flash[:notice]
+  %p.flash-error{ :style => "color: red"  }= flash[:error]
 
-  #configure-container
+  - form_for :employee, @employee, :url => {:action => "configure"} do |f|
 
-    %h2 Configure Your Account
+  #availability
+    = f.check_box :on_vacation
+    %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
+    = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
+
+  #fields
+    .field.name
+      %label{:for => "employee_name"} Name
+      = f.text_field :name
+
+    .field.email
+      %label{:for => "employee_email"} Email
+      %p This is your username to this system.
+      = f.text_field :email
+    .field.phone-number
+      %label{:for => "employee_mobile_number"} Phone number
+      = f.text_field :mobile_number
+
+    .field.pin
+      %label{:for => "employee_voicemail_pin"} Voicemail PIN
+      = f.text_field :voicemail_pin
+
+    .field.time-zone
+      %label{:for => "employee_time_zone"} Time zone
+      = select_timezone
+
+    .field.extension
+      %strong Extension: 
+      = h @employee.extension
     
-    %p.flash-notice{:style => "color: green"}= flash[:notice]
-    %p.flash-error{ :style => "color: red"  }= flash[:error]
-
-    - form_for :employee, @employee, :url => {:action => "configure"} do |f|
-
-    #availability
-      %p
-        %span.on-vacation
-          = f.check_box :on_vacation
-          %label{:for => 'employee_on_vacation'} I am currently on vacation and should not receive any calls.
-
-          = render :partial => "availability_editor", :locals => {:employee => @employee, :interactive => true}  
-
-
-    #fields
-      .field.name
-        %label{:for => "employee_name"} Name
-        = f.text_field :name
-
-      .field.email
-        %label{:for => "employee_email"} Email
-        %p This is your username to this system.
-        = f.text_field :email
-      .field.phone-number
-        %label{:for => "employee_mobile_number"} Phone number
-        = f.text_field :mobile_number
-
-      .field.pin
-        %label{:for => "employee_voicemail_pin"} Voicemail PIN
-        = f.text_field :voicemail_pin
-
-      .field.time-zone
-        %label{:for => "employee_time_zone"} Time zone
-        = select_timezone
-
-      .field.extension
-        %strong Extension: 
-        = h @employee.extension
-      
-      .field.groups
-        - if @employee.groups.any?
-        %strong Your Groups:
-        %ul
-          - for group in @employee.groups
-          %li= h group.name
-          - end
-        - else
-        %strong You don't belong to any groups
-        -end
-
-        
-
-        #other-employees.field
-          %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
-          #cheatsheet{:style => 'display: none'}
-            %ul
-              - for employee in @employees
-              %li{:class => cycle('even', 'odd')}
-                %strong=h employee.extension
-                =h employee.name
-              - end
-        .submit
-          = f.submit "Update"
-
+    .field.groups
+      - if @employee.groups.any?
+      %strong Your Groups:
+      %ul
+        - for group in @employee.groups
+        %li= h group.name
         - end
-        
-        - if @employee.must_change_password?
-        #change-password{:style => 'width: 300px'}
-          %h3{:style => "color: red"} Change Password!
+      - else
+      %strong You don't belong to any groups
+      -end
+
+  
+
+  #other-employees.field
+    %a{:href => '#', :onclick => "javascript:toggleCheatSheet(this)"} View all employees' extensions
+    #cheatsheet{:style => 'display: none'}
+      %ul
+        - for employee in @employees
+        %li{:class => cycle('even', 'odd')}
+          %strong=h employee.extension
+          =h employee.name
+        - end
+  .submit
+    = f.submit "Update"
+
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+  - end
+  
+  - if @employee.must_change_password?
+  #change-password{:style => 'width: 300px'}
+    %h3{:style => "color: red"} Change Password!
 
 
-          - form_tag :controller => "welcome", :action => "change_password" do
-          .field
-            %p
-              %label{:for => "password_one"} New password
-              = password_field_tag "password_one"
+    - form_tag :controller => "welcome", :action => "change_password" do
+    .field
+      %p
+        %label{:for => "password_one"} New password
+        = password_field_tag "password_one"
 
-            %p
-              %label{:for => "password_two"} Confirm
-              = password_field_tag "password_two"
+      %p
+        %label{:for => "password_two"} Confirm
+        = password_field_tag "password_two"
 
-          %p
-            = submit_tag "Change"
+    %p
+      = submit_tag "Change"
 
-          - end
-        -end
-        
-        %br{:style => 'clear:both'}
-      .footer
-        %span.powered-by
-          Powered by
-          %a{:href => "http://adhearsion.com"} Adhearsion
-          |
-        %span.logout= logout
-
+    - end
+  -end
+  
