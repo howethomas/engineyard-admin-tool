@@ -43,6 +43,14 @@ class Group < ActiveRecord::Base
     employees_to_call = available_employees.reject { |employee| exclusions.include?(employee.id.to_s) }
     puts "These are the guys I'm going to call: #{employees_to_call.inspect}"
     
+    # Need to implement this in a better way, for now, limit the oubound reach to 4 random
+    # members of the group.
+    if employees_to_call.size > 4
+      while employees_to_call.size > 4
+        employees_to_call.delete_at(rand(employees_to_call.size))
+      end
+    end
+    
     employees_to_call.each do |employee|
       puts "Creating call for agent #{employee}"
       
