@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => "welcome", :action => "logout"
   map.call 'employees/call/:source/:destination', :controller => "employees", :action => "call"
   map.calls 'calls', :controller => "calls", :action => "index"
-  map.voicemails 'voicemails', :controller => "voicemails", :action => "index"
+  map.voicemails 'voicemails', :controller => "voicemails", :action =>  "index"
   
   map.resources :groups
 

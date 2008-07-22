@@ -2,7 +2,12 @@ class WelcomeController < ApplicationController
   
   before_filter :ensure_logged_in, :except => [:login, :forgot_password, :reset_password, :logout]
   before_filter :ensure_admin,     :except => [:login, :forgot_password, :reset_password, :logout, :change_password, :index, :make_call]
+  
   def index
+    employee = @logged_in_user
+    if employee.admin?
+      redirect_to :action => "admin_index"
+    end
   end
   
   def login

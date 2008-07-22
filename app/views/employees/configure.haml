@@ -1,10 +1,5 @@
 #configure-container
-
   %h2 Configure Your Account
-  
-  %p.flash-notice{:style => "color: green"}= flash[:notice]
-  %p.flash-error{ :style => "color: red"  }= flash[:error]
-
   - form_for :employee, @employee, :url => {:action => "configure"} do |f|
 
   #availability

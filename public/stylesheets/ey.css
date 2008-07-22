@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/ey.css?1214331362 */
+/* @override 
+	http://localhost:3000/stylesheets/ey.css?1214331362
+	http://localhost:3000/stylesheets/ey.css?1216665597
+*/
 
 body {
 	margin: 0;
@@ -93,8 +96,34 @@ div.footer {
 	font-size: 11px;
 }
 
+#container h2 a{
+	text-align: right;
+	font-size: 16px;
+}
+
+#home_link a {
+	text-align: right;
+	font-size: 12px;
+}
+
 div.footer a {
-	color: #d0cfbe;
+	color: #f2f2d5;
+	background-color: black;
+	font-size: 12px;
+	font-family: Tahoma, "Trebuchet MS", Arial;
+}
+
+div.system_output {
+	color: black;
+	font-size: 11px;
+	font-family: Tahoma, "Trebuchet MS", Arial;	
+	text-align: left;
+}
+
+span.powered-by {
+	color: black;
+	font-size: 12px;
+	font-family: Tahoma, "Trebuchet MS", Arial;	
 }
 
 a.on-vacation-list {

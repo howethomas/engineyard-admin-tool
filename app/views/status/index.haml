@@ -1,6 +1,21 @@
-%p You can...
+%p You can check...
 
-%ul
-  %li= link_to "Check Asterisk Status", :action => "asterisk"
-  %li= link_to "Check System Status", :action => "system"
-  %li= link_to "Check Calls", :action => "calls"
+%table
+  %tr
+    %td= link_to "Asterisk", :action=>:index, :id => :asterisk
+    %td= link_to "Linux", :action=>:index, :id => :linux
+  %tr
+    %td= link_to "Agents", :action => :index, :id => :agents
+    %td= link_to "Queues", :action => :index, :id => :queues
+    %td= link_to "Channels", :action => :index, :id => :channels
+  %tr
+    %td= link_to "PRI", :action => :index, :id => :pri
+    %td= link_to "SIP", :action => :index, :id => :sip
+    %td= link_to "Voicemail", :action => :index, :id => :voicemail
+
+%br 
+%br 
+%br
+- unless @results.nil?
+  - @results.each do |l|
+    .system_output= l
