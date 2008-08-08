@@ -28,6 +28,6 @@ test:
 production:
   adapter: mysql
   username: pbx_db_acc
-  password: qn9bNUBTtE
+  password: adfadf28
   database: pbx
   host: 192.168.88.14

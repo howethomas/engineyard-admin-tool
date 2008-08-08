@@ -1,13 +1,13 @@
-PRODUCTION_SERVERS = %w[65.74.175.133 65.74.175.134]
-VM_AHN_SERVERS = '10.0.1.194'
+PRODUCTION_SERVERS = %w[10.0.0.1 10.0.0.2]
+VM_AHN_SERVERS = '10.0.1.12'
 
-TESTING_SERVER =%w[65.74.175.134]
+TESTING_SERVER =%w[10.0.0.1]
 
 set :application, "pbx-gui"
 
 # Git/Github setup
 set :scm, :git
-set :repository,  "git@github.com:howethomas/engineyard-admin-tool.git"
+set :repository,  "git@github.com:woever/blah.git"
 
 set :project_deploy_to_root, "/usr/local/engineyard"
 
